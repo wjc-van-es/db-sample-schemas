@@ -1,0 +1,143 @@
+The principles used in this manual script are the following:
+1)  The ability to copy files into and out of a running container with the docker cp command
+    https://www.baeldung.com/ops/docker-copying-files
+    https://oracle-base.com/articles/linux/docker-quick-tips
+2)  The ability to connect to a running docker container and start an interactive bash session with:
+    $ docker exec -it oracle bash
+    https://stackoverflow.com/questions/20932357/how-to-enter-in-a-docker-container-already-running-with-a-new-tty
+3)  The ability to start a subsequent sqlplus session and the fact that its home directory is defined by $ORACLE_HOME
+    So any script file execution statements should be relative from $ORACLE_HOME where in the statement below
+    -- The question mark "?" is an alias for $ORACLE_HOME
+    SQL> @?/human_resources/hr_main.sql
+    So for this statement to work the hr_main.sql was copied into $ORACLE_HOME/human_resources/
+    https://datacadamia.com/lang/sqlplus/special
+4)  The ability to connect to a running docker container as root to be able to remove files and directories or
+    change their permissions with chmod with:
+    $ docker exec -u root --workdir / -ti oracle /bin/sh
+    https://github.com/oracle/docker-images/issues/237
+    https://rmoff.net/2021/01/13/running-as-root-on-docker-images-that-dont-use-root/
+    https://engineering.bitnami.com/articles/why-non-root-containers-are-important-for-security.html
+========================================================================================================================
+Below is the script with manual steps to create the hr schema in the oracle database inside the docker container
+based on the store/oracle/database-enterprise:12.2.0.1-slim image.
+This script can be executed multiple times to reset all data.
+When changes are made in the sql files involved every step should be executed.
+When using the sql files unaltered we can make use of the ones already copied into the container and
+skip the steps 1, 3, 4 and 5, hence, only steps 2 and 6 need to be executed.
+
+step 1) Making adjustments to the scripts
+    1.1)    in hr_main.sql parameter 5 we substitute orahome for log_path
+            we should fill it with the value of $ORACLE_HOME
+    1.2)    in hr_main.sql declare log_path = &orahome./human_resources/
+    1.3)    in hr_main.sql substitute &orahome. for all occurances of __SUB__CWD__ (which means shit and cannot be set)
+
+step 2) start the oracle docker container
+        $ docker start oracle
+        check progress with
+        $ docker ps
+        after a minute the status column shoud read: Up About a minute (healthy)
+
+step 3) connect to the oracle container as root:
+        $ docker exec -u root --workdir / -ti oracle /bin/sh
+        We need root to change rights with chmod to make copied in files executable for the oracle user or remove old files
+        3.1)    remove the old scripts from $ORACLE_HOME/human_resources
+                sh-4.2# cd $(echo $ORACLE_HOME)
+                sh-4.2# pwd
+                /u01/app/oracle/product/12.2.0/dbhome_1
+                check the presence of human_resources as one of the subdirs with ls -la
+                then remove recursively with
+                sh-4.2# rm -r human_resources/
+                see its gone with ls -la again
+
+step 4) copy the content of ~/resources/git/db-sample-schemas/human_resources into $ORACLE_HOME of the container again
+        from a new terminal:
+        ~/resources/git/db-sample-schemas$ docker cp human_resources/ oracle:/u01/app/oracle/product/12.2.0/dbhome_1
+
+setp 5) as root inside container (as connected in step 3) check the new files in human_resources/ have been copied and
+        change their permissions to executable:
+        sh-4.2# ls -la
+        ...
+        drwxrwxr-x  2   1000     1000 4096 May 14 16:57 human_resources
+        ...
+        sh-4.2# cd human_resources/
+        sh-4.2# ls -la
+        total 128
+        drwxrwxr-x  2   1000     1000  4096 May 14 16:57 .
+        drwxr-xr-x 31 oracle oinstall  4096 May 14 19:40 ..
+        -rw-rw-r--  1   1000     1000  2232 May 13 20:57 hr_analz.sql
+        -rw-rw-r--  1   1000     1000  3833 May 13 20:57 hr_code.sql
+        -rw-rw-r--  1   1000     1000  8286 May 13 20:57 hr_comnt.sql
+        -rw-rw-r--  1   1000     1000 10481 May 13 20:57 hr_cre.sql
+        -rw-rw-r--  1   1000     1000 16900 May 13 20:57 hr_dn_c.sql
+        -rw-rw-r--  1   1000     1000  1997 May 13 20:57 hr_dn_d.sql
+        -rw-rw-r--  1   1000     1000  2393 May 13 20:57 hr_drop.sql
+        -rw-rw-r--  1   1000     1000  2445 May 13 20:57 hr_idx.sql
+        -rw-rw-r--  1   1000     1000  4949 May 14 16:55 hr_main.sql
+        -rw-rw-r--  1   1000     1000 45392 May 14 16:57 hr_popul.sql
+        sh-4.2# chmod -R 777 .
+        sh-4.2# ls -la
+        total 128
+        drwxrwxrwx  2   1000     1000  4096 May 14 16:57 .
+        drwxr-xr-x 31 oracle oinstall  4096 May 14 19:40 ..
+        -rwxrwxrwx  1   1000     1000  2232 May 13 20:57 hr_analz.sql
+        -rwxrwxrwx  1   1000     1000  3833 May 13 20:57 hr_code.sql
+        -rwxrwxrwx  1   1000     1000  8286 May 13 20:57 hr_comnt.sql
+        -rwxrwxrwx  1   1000     1000 10481 May 13 20:57 hr_cre.sql
+        -rwxrwxrwx  1   1000     1000 16900 May 13 20:57 hr_dn_c.sql
+        -rwxrwxrwx  1   1000     1000  1997 May 13 20:57 hr_dn_d.sql
+        -rwxrwxrwx  1   1000     1000  2393 May 13 20:57 hr_drop.sql
+        -rwxrwxrwx  1   1000     1000  2445 May 13 20:57 hr_idx.sql
+        -rwxrwxrwx  1   1000     1000  4949 May 14 16:55 hr_main.sql
+        -rwxrwxrwx  1   1000     1000 45392 May 14 16:57 hr_popul.sql
+        sh-4.2#
+
+step 6) now connect to the container as normal user to start sqlplus and run the $ORACLE_HOME/human_resources/hr_main.sql script
+        step 6.1)   connect
+                    willem@willem-Latitude-5590:~$ docker exec -it oracle bash
+                     [oracle@2ee5275f03dc /]$ echo $ORACLE_HOME
+                     /u01/app/oracle/product/12.2.0/dbhome_1
+        step 6.2)   start sqlplus as user sys as sysdba
+                    [oracle@2ee5275f03dc /]$ sqlplus sys/Oradoc_db1@localhost:1521/ORCLPDB1.localdomain as sysdba
+
+                    SQL*Plus: Release 12.2.0.1.0 Production on Fri May 14 20:03:19 2021
+
+                    Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+                    Last Successful login time: Fri May 14 2021 15:20:52 +00:00
+
+                    Connected to:
+                    Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+        step 6.3)   Make sure all connections to hr@localhost:1521/ORCLPDB1.localdomain are severed otherwise hr cannot
+                    be dropped before recreating it.
+        step 6.4)   execute hr_main.sql
+                    SQL> @?/human_resources/hr_main.sql
+
+                    specify password for HR as parameter 1:
+                    Enter value for 1: welcome1
+
+                    specify default tablespeace for HR as parameter 2:
+                    Enter value for 2: users
+
+                    specify temporary tablespace for HR as parameter 3:
+                    Enter value for 3: temp
+
+                    specify password for SYS as parameter 4:
+                    Enter value for 4: Oradoc_db1
+
+                    specify orahome path as parameter 5:
+                    Enter value for 5: /u01/app/oracle/product/12.2.0/dbhome_1
+
+                    specify connect string as parameter 6:
+                    Enter value for 6: localhost:1521/ORCLPDB1.localdomain
+
+                    The spool_file variable is set to /u01/app/oracle/product/12.2.0/dbhome_1/human_resources/hr_main.log
+                    ... (lots of logging being echoed that will also end up in the above spool file)
+                   PL/SQL procedure successfully completed.
+
+                   SQL>
+        step 6.5)   In another terminal copy the log file back to the host environment
+                    ~/resources/git/db-sample-schemas$ docker cp oracle:/u01/app/oracle/product/12.2.0/dbhome_1/human_resources/hr_main.log human_resources/hr_main.log
+
+
+
+

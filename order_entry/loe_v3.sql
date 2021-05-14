@@ -101,7 +101,7 @@ ALTER TABLE customers
     , income_level       VARCHAR2(20));
 
 -- Set NLS settings because of hard coded date values
-ALTER SESSION SET NLS_LANGUAGE=AMERICAN;
+ALTER SESSION SET NLS_LANGUAGE=American;
 ALTER SESSION SET NLS_TERRITORY=AMERICA;
 
 SET FEEDBACK OFF

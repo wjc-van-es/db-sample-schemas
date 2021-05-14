@@ -1,0 +1,2 @@
+willem@willem-Latitude-5590:~/resources/git/db-sample-schemas$ docker cp human_resources/ oracle:/u01/app/oracle/product/12.2.0/dbhome_1
+willem@willem-Latitude-5590:~/resources/git/db-sample-schemas$ docker cp oracle:/u01/app/oracle/product/12.2.0/dbhome_1/human_resources/hr_main.log human_resources/hr_main.log

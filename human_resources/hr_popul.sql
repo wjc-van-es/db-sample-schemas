@@ -59,7 +59,7 @@ rem   ahunold   02/20/01 - NLS_LANGUAGE, replacing non American
 rem   ahunold   01/09/01 - checkin ADE
 
 SET VERIFY OFF
-ALTER SESSION SET NLS_LANGUAGE=American; 
+ALTER SESSION SET NLS_LANGUAGE=American;
 
 REM ***************************insert data into the REGIONS table
 

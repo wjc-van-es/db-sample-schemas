@@ -65,18 +65,28 @@ DEFINE ttbs     = &3
 PROMPT 
 PROMPT specify password for SYS as parameter 4:
 DEFINE pass_sys = &4
-PROMPT 
-PROMPT specify log path as parameter 5:
-DEFINE log_path = &5
+PROMPT
+--  __SUB__CWD__ is replaced with orahome
+PROMPT specify orahome path as parameter 5:
+DEFINE orahome = &5
 PROMPT
 PROMPT specify connect string as parameter 6:
 DEFINE connect_string     = &6
 PROMPT
 
+--  __SUB__CWD__ is replaced with &orahome
+-- which in case of the docker container should point to
+-- /u01/app/oracle/product/12.2.0/dbhome_1
+-- The first dot in the spool command below is
+-- the SQL*Plus concatenation character
+DEFINE log_path = &orahome./human_resources/
+
 -- The first dot in the spool command below is 
 -- the SQL*Plus concatenation character
-
 DEFINE spool_file = &log_path.hr_main.log
+
+PROMPT The spool_file variable is set to &spool_file
+
 SPOOL &spool_file
 
 REM =======================================================
@@ -121,36 +131,36 @@ ALTER SESSION SET NLS_TERRITORY=America;
 -- create tables, sequences and constraint
 --
 
-@__SUB__CWD__/human_resources/hr_cre
+@&orahome./human_resources/hr_cre
 
 -- 
 -- populate tables
 --
 
-@__SUB__CWD__/human_resources/hr_popul
+@&orahome./human_resources/hr_popul
 
 --
 -- create indexes
 --
 
-@__SUB__CWD__/human_resources/hr_idx
+@&orahome./human_resources/hr_idx
 
 --
 -- create procedural objects
 --
 
-@__SUB__CWD__/human_resources/hr_code
+@&orahome./human_resources/hr_code
 
 --
 -- add comments to tables and columns
 --
 
-@__SUB__CWD__/human_resources/hr_comnt
+@&orahome./human_resources/hr_comnt
 
 --
 -- gather schema statistics
 --
 
-@__SUB__CWD__/human_resources/hr_analz
+@&orahome./human_resources/hr_analz
 
 spool off

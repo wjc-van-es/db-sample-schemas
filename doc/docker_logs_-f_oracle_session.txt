@@ -1,0 +1,2374 @@
+willem@willem-Latitude-5590:~$ docker logs -f oracle
+Setup Oracle Database
+Oracle Database 12.2.0.1 Setup
+Sun May 2 21:18:51 UTC 2021
+
+Check parameters ......
+log file is : /home/oracle/setup/log/paramChk.log
+paramChk.sh is done at 0 sec
+
+untar DB bits ......
+log file is : /home/oracle/setup/log/untarDB.log
+untarDB.sh is done at 14 sec
+
+config DB ......
+log file is : /home/oracle/setup/log/configDB.log
+Sun May 2 21:19:05 UTC 2021
+Start Docker DB configuration
+Call configDBora.sh to configure database
+Sun May 2 21:19:05 UTC 2021
+Configure DB as oracle user
+Setup Database directories ...
+startup database instance
+
+SQL*Plus: Release 12.2.0.1.0 Production on Sun May 2 21:19:05 2021
+
+Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+
+Connected to an idle instance.
+
+SQL> ORACLE instance started.
+
+Total System Global Area 1342177280 bytes
+Fixed Size		    8792536 bytes
+Variable Size		  603981352 bytes
+Database Buffers	  721420288 bytes
+Redo Buffers		    7983104 bytes
+Database mounted.
+Database opened.
+SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+
+LSNRCTL for Linux: Version 12.2.0.1.0 - Production on 02-MAY-2021 21:19:17
+
+Copyright (c) 1991, 2016, Oracle.  All rights reserved.
+
+Starting /u01/app/oracle/product/12.2.0/dbhome_1/bin/tnslsnr: please wait...
+
+TNSLSNR for Linux: Version 12.2.0.1.0 - Production
+System parameter file is /u01/app/oracle/product/12.2.0/dbhome_1/admin/ORCLCDB/listener.ora
+Log messages written to /u01/app/oracle/diag/tnslsnr/2ee5275f03dc/listener/alert/log.xml
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
+Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+
+Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=0.0.0.0)(PORT=1521)))
+STATUS of the LISTENER
+------------------------
+Alias                     LISTENER
+Version                   TNSLSNR for Linux: Version 12.2.0.1.0 - Production
+Start Date                02-MAY-2021 21:19:17
+Uptime                    0 days 0 hr. 0 min. 0 sec
+Trace Level               off
+Security                  ON: Local OS Authentication
+SNMP                      OFF
+Listener Parameter File   /u01/app/oracle/product/12.2.0/dbhome_1/admin/ORCLCDB/listener.ora
+Listener Log File         /u01/app/oracle/diag/tnslsnr/2ee5275f03dc/listener/alert/log.xml
+Listening Endpoints Summary...
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
+  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+The listener supports no services
+The command completed successfully
+
+DONE!
+Remove password info
+Docker DB configuration is complete !
+configDB.sh is done at 26 sec
+
+Done ! The database is ready for use .
+# ===========================================================================  
+# == Add below entries to your tnsnames.ora to access this database server ==  
+# ====================== from external host =================================  
+ORCLCDB=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<ip-address>)(PORT=<port>))
+    (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLCDB.localdomain)))     
+ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<ip-address>)(PORT=<port>))
+    (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLPDB1.localdomain)))     
+#                                                                              
+#ip-address : IP address of the host where the container is running.           
+#port       : Host Port that is mapped to the port 1521 of the container.      
+#                                                                              
+# The mapped port can be obtained from running "docker port <container-id>"  
+# ===========================================================================  
+ORCLPDB1(3):Undo initialization finished serial:0 start:10888798 end:10888948 diff:150 ms (0.2 seconds)
+ORCLPDB1(3):Database Characterset for ORCLPDB1 is AL32UTF8
+2021-05-02T21:19:16.546194+00:00
+ORCLPDB1(3):Opatch validation is skipped for PDB ORCLPDB1 (con_id=0)
+ORCLPDB1(3):Opening pdb with no Resource Manager plan active
+Pluggable database ORCLPDB1 opened read write
+Starting background process CJQ0
+2021-05-02T21:19:17.095557+00:00
+CJQ0 started with pid=73, OS id=251 
+Completed: ALTER DATABASE OPEN
+2021-05-02T21:49:14.623053+00:00
+Thread 1 advanced to log sequence 450 (LGWR switch)
+  Current log# 3 seq# 450 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-02T21:49:14.918325+00:00
+Thread 1 advanced to log sequence 451 (LGWR switch)
+  Current log# 1 seq# 451 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 452
+Checkpoint not complete
+  Current log# 1 seq# 451 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-02T21:49:16.247983+00:00
+Thread 1 advanced to log sequence 452 (LGWR switch)
+  Current log# 2 seq# 452 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 453
+Checkpoint not complete
+  Current log# 2 seq# 452 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-02T21:49:19.337081+00:00
+Thread 1 advanced to log sequence 453 (LGWR switch)
+  Current log# 3 seq# 453 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 454
+Checkpoint not complete
+  Current log# 3 seq# 453 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-02T21:49:22.408331+00:00
+Thread 1 advanced to log sequence 454 (LGWR switch)
+  Current log# 1 seq# 454 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 455
+Checkpoint not complete
+  Current log# 1 seq# 454 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-02T21:49:25.478972+00:00
+Thread 1 advanced to log sequence 455 (LGWR switch)
+  Current log# 2 seq# 455 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 456
+Checkpoint not complete
+  Current log# 2 seq# 455 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-02T21:49:28.546113+00:00
+Thread 1 advanced to log sequence 456 (LGWR switch)
+  Current log# 3 seq# 456 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 457
+Checkpoint not complete
+  Current log# 3 seq# 456 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-02T21:49:31.706274+00:00
+Thread 1 advanced to log sequence 457 (LGWR switch)
+  Current log# 1 seq# 457 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 458
+Checkpoint not complete
+  Current log# 1 seq# 457 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-02T21:49:34.703035+00:00
+Thread 1 advanced to log sequence 458 (LGWR switch)
+  Current log# 2 seq# 458 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 459
+Checkpoint not complete
+  Current log# 2 seq# 458 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-02T21:49:37.766736+00:00
+Thread 1 advanced to log sequence 459 (LGWR switch)
+  Current log# 3 seq# 459 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 460
+Checkpoint not complete
+  Current log# 3 seq# 459 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-02T21:49:40.842327+00:00
+Thread 1 advanced to log sequence 460 (LGWR switch)
+  Current log# 1 seq# 460 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 461
+Checkpoint not complete
+  Current log# 1 seq# 460 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-02T21:49:43.917199+00:00
+Thread 1 advanced to log sequence 461 (LGWR switch)
+  Current log# 2 seq# 461 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-02T22:00:18.098780+00:00
+Thread 1 advanced to log sequence 462 (LGWR switch)
+  Current log# 3 seq# 462 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-02T22:00:19.675070+00:00
+Thread 1 advanced to log sequence 463 (LGWR switch)
+  Current log# 1 seq# 463 mem# 0: /u04/app/oracle/redo/redo001.log
+Sun May 2 22:21:00 UTC 2021
+shutdown database
+Start up Oracle Database
+Sat May 8 12:00:46 UTC 2021
+start database
+start listener
+The database is ready for use .
+ORCLPDB1(3):Undo initialization finished serial:0 start:1772530 end:1772678 diff:148 ms (0.1 seconds)
+ORCLPDB1(3):Database Characterset for ORCLPDB1 is AL32UTF8
+ORCLPDB1(3):Opatch validation is skipped for PDB ORCLPDB1 (con_id=0)
+2021-05-08T12:00:56.602875+00:00
+ORCLPDB1(3):Opening pdb with no Resource Manager plan active
+Pluggable database ORCLPDB1 opened read write
+Starting background process CJQ0
+2021-05-08T12:00:56.776425+00:00
+CJQ0 started with pid=40, OS id=231 
+Completed: ALTER DATABASE OPEN
+2021-05-08T12:01:00.271046+00:00
+Setting Resource Manager plan SCHEDULER[0x4AC8]:DEFAULT_MAINTENANCE_PLAN via scheduler window
+Setting Resource Manager CDB plan DEFAULT_MAINTENANCE_PLAN via parameter
+ORCLPDB1(3):Setting Resource Manager plan SCHEDULER[0x4AC2]:DEFAULT_MAINTENANCE_PLAN via scheduler window
+ORCLPDB1(3):Setting Resource Manager plan DEFAULT_MAINTENANCE_PLAN via parameter
+2021-05-08T12:01:02.955492+00:00
+Begin automatic SQL Tuning Advisor run for special tuning task  "SYS_AUTO_SQL_TUNING_TASK"
+2021-05-08T12:01:03.945614+00:00
+Thread 1 advanced to log sequence 464 (LGWR switch)
+  Current log# 2 seq# 464 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:01:05.303927+00:00
+End automatic SQL Tuning Advisor run for special tuning task  "SYS_AUTO_SQL_TUNING_TASK"
+2021-05-08T12:01:08.789083+00:00
+Thread 1 advanced to log sequence 465 (LGWR switch)
+  Current log# 3 seq# 465 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:01:09.023318+00:00
+TABLE SYS.WRI$_OPTSTAT_HISTHEAD_HISTORY: ADDED INTERVAL PARTITION SYS_P375 (44323) VALUES LESS THAN (TO_DATE(' 2021-05-09 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+TABLE SYS.WRI$_OPTSTAT_HISTGRM_HISTORY: ADDED INTERVAL PARTITION SYS_P378 (44323) VALUES LESS THAN (TO_DATE(' 2021-05-09 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+2021-05-08T12:01:10.376154+00:00
+Thread 1 cannot allocate new log, sequence 466
+Checkpoint not complete
+  Current log# 3 seq# 465 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:01:11.284089+00:00
+Thread 1 advanced to log sequence 466 (LGWR switch)
+  Current log# 1 seq# 466 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:01:12.419890+00:00
+Thread 1 cannot allocate new log, sequence 467
+Checkpoint not complete
+  Current log# 1 seq# 466 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:01:14.362465+00:00
+Thread 1 advanced to log sequence 467 (LGWR switch)
+  Current log# 2 seq# 467 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:01:14.488421+00:00
+ORCLPDB1(3):TABLE SYS.WRI$_OPTSTAT_HISTHEAD_HISTORY: ADDED INTERVAL PARTITION SYS_P268 (44323) VALUES LESS THAN (TO_DATE(' 2021-05-09 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+ORCLPDB1(3):TABLE SYS.WRI$_OPTSTAT_HISTGRM_HISTORY: ADDED INTERVAL PARTITION SYS_P271 (44323) VALUES LESS THAN (TO_DATE(' 2021-05-09 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+2021-05-08T12:01:15.407906+00:00
+Thread 1 cannot allocate new log, sequence 468
+Checkpoint not complete
+  Current log# 2 seq# 467 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:01:17.441626+00:00
+Thread 1 advanced to log sequence 468 (LGWR switch)
+  Current log# 3 seq# 468 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:01:18.510150+00:00
+Thread 1 cannot allocate new log, sequence 469
+Checkpoint not complete
+  Current log# 3 seq# 468 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:01:20.520996+00:00
+Thread 1 advanced to log sequence 469 (LGWR switch)
+  Current log# 1 seq# 469 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 470
+Checkpoint not complete
+  Current log# 1 seq# 469 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:01:23.595418+00:00
+Thread 1 advanced to log sequence 470 (LGWR switch)
+  Current log# 2 seq# 470 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 471
+Checkpoint not complete
+  Current log# 2 seq# 470 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:01:26.650150+00:00
+Thread 1 advanced to log sequence 471 (LGWR switch)
+  Current log# 3 seq# 471 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 472
+Checkpoint not complete
+  Current log# 3 seq# 471 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:01:29.713853+00:00
+Thread 1 advanced to log sequence 472 (LGWR switch)
+  Current log# 1 seq# 472 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 473
+Checkpoint not complete
+  Current log# 1 seq# 472 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:01:32.796018+00:00
+Thread 1 advanced to log sequence 473 (LGWR switch)
+  Current log# 2 seq# 473 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 474
+Checkpoint not complete
+  Current log# 2 seq# 473 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:01:35.864775+00:00
+Thread 1 advanced to log sequence 474 (LGWR switch)
+  Current log# 3 seq# 474 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 475
+Checkpoint not complete
+  Current log# 3 seq# 474 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:01:38.937117+00:00
+Thread 1 advanced to log sequence 475 (LGWR switch)
+  Current log# 1 seq# 475 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 476
+Checkpoint not complete
+  Current log# 1 seq# 475 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:01:42.007545+00:00
+Thread 1 advanced to log sequence 476 (LGWR switch)
+  Current log# 2 seq# 476 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 477
+Checkpoint not complete
+  Current log# 2 seq# 476 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:01:45.093578+00:00
+Thread 1 advanced to log sequence 477 (LGWR switch)
+  Current log# 3 seq# 477 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 478
+Checkpoint not complete
+  Current log# 3 seq# 477 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:01:48.145181+00:00
+Thread 1 advanced to log sequence 478 (LGWR switch)
+  Current log# 1 seq# 478 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 479
+Checkpoint not complete
+  Current log# 1 seq# 478 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:01:51.235657+00:00
+Thread 1 advanced to log sequence 479 (LGWR switch)
+  Current log# 2 seq# 479 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 480
+Checkpoint not complete
+  Current log# 2 seq# 479 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:01:54.305763+00:00
+Thread 1 advanced to log sequence 480 (LGWR switch)
+  Current log# 3 seq# 480 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 481
+Checkpoint not complete
+  Current log# 3 seq# 480 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:01:57.425546+00:00
+Thread 1 advanced to log sequence 481 (LGWR switch)
+  Current log# 1 seq# 481 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:01:57.789067+00:00
+TABLE SYS.WRP$_REPORTS: ADDED INTERVAL PARTITION SYS_P379 (4146) VALUES LESS THAN (TO_DATE(' 2021-05-09 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+TABLE SYS.WRP$_REPORTS_DETAILS: ADDED INTERVAL PARTITION SYS_P380 (4146) VALUES LESS THAN (TO_DATE(' 2021-05-09 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+TABLE SYS.WRP$_REPORTS_TIME_BANDS: ADDED INTERVAL PARTITION SYS_P383 (4145) VALUES LESS THAN (TO_DATE(' 2021-05-08 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+Thread 1 cannot allocate new log, sequence 482
+Checkpoint not complete
+  Current log# 1 seq# 481 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:02:00.435894+00:00
+Thread 1 advanced to log sequence 482 (LGWR switch)
+  Current log# 2 seq# 482 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 483
+Checkpoint not complete
+  Current log# 2 seq# 482 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:02:03.511012+00:00
+Thread 1 advanced to log sequence 483 (LGWR switch)
+  Current log# 3 seq# 483 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:02:05.038902+00:00
+Thread 1 cannot allocate new log, sequence 484
+Checkpoint not complete
+  Current log# 3 seq# 483 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:02:06.591694+00:00
+Thread 1 advanced to log sequence 484 (LGWR switch)
+  Current log# 1 seq# 484 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:02:07.734908+00:00
+Thread 1 cannot allocate new log, sequence 485
+Checkpoint not complete
+  Current log# 1 seq# 484 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:02:09.651944+00:00
+Thread 1 advanced to log sequence 485 (LGWR switch)
+  Current log# 2 seq# 485 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:02:12.054567+00:00
+Thread 1 cannot allocate new log, sequence 486
+Checkpoint not complete
+  Current log# 2 seq# 485 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:02:12.734155+00:00
+Thread 1 advanced to log sequence 486 (LGWR switch)
+  Current log# 3 seq# 486 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:02:14.888486+00:00
+Thread 1 cannot allocate new log, sequence 487
+Checkpoint not complete
+  Current log# 3 seq# 486 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:02:15.800162+00:00
+Thread 1 advanced to log sequence 487 (LGWR switch)
+  Current log# 1 seq# 487 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:02:17.496444+00:00
+Thread 1 cannot allocate new log, sequence 488
+Checkpoint not complete
+  Current log# 1 seq# 487 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:02:18.869260+00:00
+Thread 1 advanced to log sequence 488 (LGWR switch)
+  Current log# 2 seq# 488 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 489
+Checkpoint not complete
+  Current log# 2 seq# 488 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:02:21.958025+00:00
+Thread 1 advanced to log sequence 489 (LGWR switch)
+  Current log# 3 seq# 489 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 490
+Checkpoint not complete
+  Current log# 3 seq# 489 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:02:25.019720+00:00
+Thread 1 advanced to log sequence 490 (LGWR switch)
+  Current log# 1 seq# 490 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T12:02:25.344452+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j007_269.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_171"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T12:11:08.332512+00:00
+Thread 1 advanced to log sequence 491 (LGWR switch)
+  Current log# 2 seq# 491 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T12:11:09.010059+00:00
+Thread 1 advanced to log sequence 492 (LGWR switch)
+  Current log# 3 seq# 492 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:15:53.902353+00:00
+Thread 1 cannot allocate new log, sequence 493
+Checkpoint not complete
+  Current log# 3 seq# 492 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T12:15:56.024200+00:00
+Thread 1 advanced to log sequence 493 (LGWR switch)
+  Current log# 1 seq# 493 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:00:23.473377+00:00
+Thread 1 advanced to log sequence 494 (LGWR switch)
+  Current log# 2 seq# 494 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:11:10.521494+00:00
+Thread 1 advanced to log sequence 495 (LGWR switch)
+  Current log# 3 seq# 495 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:11:12.467808+00:00
+Thread 1 advanced to log sequence 496 (LGWR switch)
+  Current log# 1 seq# 496 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:11:13.547531+00:00
+Thread 1 cannot allocate new log, sequence 497
+Checkpoint not complete
+  Current log# 1 seq# 496 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:11:16.608014+00:00
+Thread 1 advanced to log sequence 497 (LGWR switch)
+  Current log# 2 seq# 497 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 498
+Checkpoint not complete
+  Current log# 2 seq# 497 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:11:19.675782+00:00
+Thread 1 advanced to log sequence 498 (LGWR switch)
+  Current log# 3 seq# 498 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 499
+Checkpoint not complete
+  Current log# 3 seq# 498 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:11:22.753303+00:00
+Thread 1 advanced to log sequence 499 (LGWR switch)
+  Current log# 1 seq# 499 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 500
+Checkpoint not complete
+  Current log# 1 seq# 499 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:11:25.815789+00:00
+Thread 1 advanced to log sequence 500 (LGWR switch)
+  Current log# 2 seq# 500 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 501
+Checkpoint not complete
+  Current log# 2 seq# 500 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:11:28.897700+00:00
+Thread 1 advanced to log sequence 501 (LGWR switch)
+  Current log# 3 seq# 501 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 502
+Checkpoint not complete
+  Current log# 3 seq# 501 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:11:31.974226+00:00
+Thread 1 advanced to log sequence 502 (LGWR switch)
+  Current log# 1 seq# 502 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 503
+Checkpoint not complete
+  Current log# 1 seq# 502 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:11:35.042582+00:00
+Thread 1 advanced to log sequence 503 (LGWR switch)
+  Current log# 2 seq# 503 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 504
+Checkpoint not complete
+  Current log# 2 seq# 503 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:11:38.100950+00:00
+Thread 1 advanced to log sequence 504 (LGWR switch)
+  Current log# 3 seq# 504 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 505
+Checkpoint not complete
+  Current log# 3 seq# 504 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:11:41.192138+00:00
+Thread 1 advanced to log sequence 505 (LGWR switch)
+  Current log# 1 seq# 505 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 506
+Checkpoint not complete
+  Current log# 1 seq# 505 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:11:44.254071+00:00
+Thread 1 advanced to log sequence 506 (LGWR switch)
+  Current log# 2 seq# 506 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:11:44.899443+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_2099.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_174"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T13:21:05.972564+00:00
+Thread 1 advanced to log sequence 507 (LGWR switch)
+  Current log# 3 seq# 507 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:21:06.577959+00:00
+Thread 1 advanced to log sequence 508 (LGWR switch)
+  Current log# 1 seq# 508 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:21:07.070616+00:00
+Thread 1 cannot allocate new log, sequence 509
+Checkpoint not complete
+  Current log# 1 seq# 508 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:21:09.508628+00:00
+Thread 1 advanced to log sequence 509 (LGWR switch)
+  Current log# 2 seq# 509 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 510
+Checkpoint not complete
+  Current log# 2 seq# 509 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:21:12.566944+00:00
+Thread 1 advanced to log sequence 510 (LGWR switch)
+  Current log# 3 seq# 510 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 511
+Checkpoint not complete
+  Current log# 3 seq# 510 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:21:15.635966+00:00
+Thread 1 advanced to log sequence 511 (LGWR switch)
+  Current log# 1 seq# 511 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 512
+Checkpoint not complete
+  Current log# 1 seq# 511 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:21:18.710839+00:00
+Thread 1 advanced to log sequence 512 (LGWR switch)
+  Current log# 2 seq# 512 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:21:18.831154+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_2366.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_176"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+Thread 1 cannot allocate new log, sequence 513
+Checkpoint not complete
+  Current log# 2 seq# 512 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:21:21.793289+00:00
+Thread 1 advanced to log sequence 513 (LGWR switch)
+  Current log# 3 seq# 513 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:31:08.077376+00:00
+Thread 1 advanced to log sequence 514 (LGWR switch)
+  Current log# 1 seq# 514 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:31:08.747249+00:00
+Thread 1 advanced to log sequence 515 (LGWR switch)
+  Current log# 2 seq# 515 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:31:09.389336+00:00
+Thread 1 cannot allocate new log, sequence 516
+Checkpoint not complete
+  Current log# 2 seq# 515 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:31:11.624942+00:00
+Thread 1 advanced to log sequence 516 (LGWR switch)
+  Current log# 3 seq# 516 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:31:12.717765+00:00
+Thread 1 cannot allocate new log, sequence 517
+Checkpoint not complete
+  Current log# 3 seq# 516 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:31:14.676067+00:00
+Thread 1 advanced to log sequence 517 (LGWR switch)
+  Current log# 1 seq# 517 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:31:15.264832+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_2627.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_178"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+Thread 1 cannot allocate new log, sequence 518
+Checkpoint not complete
+  Current log# 1 seq# 517 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:31:17.751070+00:00
+Thread 1 advanced to log sequence 518 (LGWR switch)
+  Current log# 2 seq# 518 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 519
+Checkpoint not complete
+  Current log# 2 seq# 518 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:31:20.822977+00:00
+Thread 1 advanced to log sequence 519 (LGWR switch)
+  Current log# 3 seq# 519 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:41:14.233149+00:00
+Thread 1 advanced to log sequence 520 (LGWR switch)
+  Current log# 1 seq# 520 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:41:14.757816+00:00
+Thread 1 advanced to log sequence 521 (LGWR switch)
+  Current log# 2 seq# 521 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:41:15.729270+00:00
+Thread 1 cannot allocate new log, sequence 522
+Checkpoint not complete
+  Current log# 2 seq# 521 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:41:16.736984+00:00
+Thread 1 advanced to log sequence 522 (LGWR switch)
+  Current log# 3 seq# 522 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 523
+Checkpoint not complete
+  Current log# 3 seq# 522 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:41:19.861313+00:00
+Thread 1 advanced to log sequence 523 (LGWR switch)
+  Current log# 1 seq# 523 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 524
+Checkpoint not complete
+  Current log# 1 seq# 523 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:41:22.936870+00:00
+Thread 1 advanced to log sequence 524 (LGWR switch)
+  Current log# 2 seq# 524 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T13:41:23.210604+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_2883.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_180"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T13:51:11.325360+00:00
+Thread 1 advanced to log sequence 525 (LGWR switch)
+  Current log# 3 seq# 525 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T13:51:11.857138+00:00
+Thread 1 advanced to log sequence 526 (LGWR switch)
+  Current log# 1 seq# 526 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:51:12.565798+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_3147.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_182"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T13:51:14.736131+00:00
+Thread 1 cannot allocate new log, sequence 527
+Checkpoint not complete
+  Current log# 1 seq# 526 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T13:51:15.718184+00:00
+Thread 1 advanced to log sequence 527 (LGWR switch)
+  Current log# 2 seq# 527 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:00:58.385501+00:00
+Thread 1 advanced to log sequence 528 (LGWR switch)
+  Current log# 3 seq# 528 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:00:58.733127+00:00
+Thread 1 advanced to log sequence 529 (LGWR switch)
+  Current log# 1 seq# 529 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:01:14.999206+00:00
+Thread 1 cannot allocate new log, sequence 530
+Checkpoint not complete
+  Current log# 1 seq# 529 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:01:17.936789+00:00
+Thread 1 advanced to log sequence 530 (LGWR switch)
+  Current log# 2 seq# 530 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 531
+Checkpoint not complete
+  Current log# 2 seq# 530 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:01:21.025937+00:00
+Thread 1 advanced to log sequence 531 (LGWR switch)
+  Current log# 3 seq# 531 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:01:22.764245+00:00
+Thread 1 cannot allocate new log, sequence 532
+Checkpoint not complete
+  Current log# 3 seq# 531 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:01:24.091956+00:00
+Thread 1 advanced to log sequence 532 (LGWR switch)
+  Current log# 1 seq# 532 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:01:25.399353+00:00
+Thread 1 cannot allocate new log, sequence 533
+Checkpoint not complete
+  Current log# 1 seq# 532 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:01:27.160296+00:00
+Thread 1 advanced to log sequence 533 (LGWR switch)
+  Current log# 2 seq# 533 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 534
+Checkpoint not complete
+  Current log# 2 seq# 533 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:01:30.229237+00:00
+Thread 1 advanced to log sequence 534 (LGWR switch)
+  Current log# 3 seq# 534 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 535
+Checkpoint not complete
+  Current log# 3 seq# 534 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:01:33.300516+00:00
+Thread 1 advanced to log sequence 535 (LGWR switch)
+  Current log# 1 seq# 535 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:01:34.348949+00:00
+Thread 1 cannot allocate new log, sequence 536
+Checkpoint not complete
+  Current log# 1 seq# 535 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:01:36.374289+00:00
+Thread 1 advanced to log sequence 536 (LGWR switch)
+  Current log# 2 seq# 536 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:01:37.126429+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_3393.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_184"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T14:11:13.114085+00:00
+Thread 1 advanced to log sequence 537 (LGWR switch)
+  Current log# 3 seq# 537 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:11:14.060450+00:00
+Thread 1 advanced to log sequence 538 (LGWR switch)
+  Current log# 1 seq# 538 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:11:14.549780+00:00
+Thread 1 cannot allocate new log, sequence 539
+Checkpoint not complete
+  Current log# 1 seq# 538 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:11:16.980696+00:00
+Thread 1 advanced to log sequence 539 (LGWR switch)
+  Current log# 2 seq# 539 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 540
+Checkpoint not complete
+  Current log# 2 seq# 539 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:11:20.056793+00:00
+Thread 1 advanced to log sequence 540 (LGWR switch)
+  Current log# 3 seq# 540 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 541
+Checkpoint not complete
+  Current log# 3 seq# 540 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:11:23.122656+00:00
+Thread 1 advanced to log sequence 541 (LGWR switch)
+  Current log# 1 seq# 541 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 542
+Checkpoint not complete
+  Current log# 1 seq# 541 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:11:26.204497+00:00
+Thread 1 advanced to log sequence 542 (LGWR switch)
+  Current log# 2 seq# 542 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:11:26.455324+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_3678.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_186"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T14:16:07.096530+00:00
+Thread 1 cannot allocate new log, sequence 543
+Checkpoint not complete
+  Current log# 2 seq# 542 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:16:08.824373+00:00
+Thread 1 advanced to log sequence 543 (LGWR switch)
+  Current log# 3 seq# 543 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:21:17.175916+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_3939.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_188"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T14:21:19.381296+00:00
+Thread 1 advanced to log sequence 544 (LGWR switch)
+  Current log# 1 seq# 544 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:21:20.097304+00:00
+Thread 1 advanced to log sequence 545 (LGWR switch)
+  Current log# 2 seq# 545 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:26:26.439406+00:00
+Thread 1 cannot allocate new log, sequence 546
+Checkpoint not complete
+  Current log# 2 seq# 545 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:26:26.494621+00:00
+Thread 1 advanced to log sequence 546 (LGWR switch)
+  Current log# 3 seq# 546 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:31:20.718668+00:00
+Thread 1 advanced to log sequence 547 (LGWR switch)
+  Current log# 1 seq# 547 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 548
+Checkpoint not complete
+  Current log# 1 seq# 547 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:31:24.275478+00:00
+Thread 1 advanced to log sequence 548 (LGWR switch)
+  Current log# 2 seq# 548 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 549
+Checkpoint not complete
+  Current log# 2 seq# 548 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:31:27.360499+00:00
+Thread 1 advanced to log sequence 549 (LGWR switch)
+  Current log# 3 seq# 549 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:31:28.074844+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_4205.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_190"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T14:41:17.738433+00:00
+Thread 1 advanced to log sequence 550 (LGWR switch)
+  Current log# 1 seq# 550 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:41:18.556892+00:00
+Thread 1 advanced to log sequence 551 (LGWR switch)
+  Current log# 2 seq# 551 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:41:19.835286+00:00
+Thread 1 cannot allocate new log, sequence 552
+Checkpoint not complete
+  Current log# 2 seq# 551 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:41:20.193882+00:00
+Thread 1 advanced to log sequence 552 (LGWR switch)
+  Current log# 3 seq# 552 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:41:20.618955+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_4461.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_192"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T14:41:21.775740+00:00
+Thread 1 cannot allocate new log, sequence 553
+Checkpoint not complete
+  Current log# 3 seq# 552 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:41:23.264751+00:00
+Thread 1 advanced to log sequence 553 (LGWR switch)
+  Current log# 1 seq# 553 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 554
+Checkpoint not complete
+  Current log# 1 seq# 553 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:41:26.389035+00:00
+Thread 1 advanced to log sequence 554 (LGWR switch)
+  Current log# 2 seq# 554 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T14:51:17.781804+00:00
+Resize operation completed for file# 3, old size 819200K, new size 829440K
+2021-05-08T14:51:19.172211+00:00
+Thread 1 advanced to log sequence 555 (LGWR switch)
+  Current log# 3 seq# 555 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T14:51:19.850361+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_4729.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_194"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T14:51:22.083460+00:00
+Thread 1 advanced to log sequence 556 (LGWR switch)
+  Current log# 1 seq# 556 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 557
+Checkpoint not complete
+  Current log# 1 seq# 556 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T14:51:25.434655+00:00
+Thread 1 advanced to log sequence 557 (LGWR switch)
+  Current log# 2 seq# 557 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:00:35.816636+00:00
+Thread 1 advanced to log sequence 558 (LGWR switch)
+  Current log# 3 seq# 558 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:01:15.859452+00:00
+Thread 1 advanced to log sequence 559 (LGWR switch)
+  Current log# 1 seq# 559 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:01:23.567768+00:00
+Thread 1 cannot allocate new log, sequence 560
+Checkpoint not complete
+  Current log# 1 seq# 559 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:01:24.337597+00:00
+Thread 1 advanced to log sequence 560 (LGWR switch)
+  Current log# 2 seq# 560 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:01:25.355455+00:00
+Thread 1 cannot allocate new log, sequence 561
+Checkpoint not complete
+  Current log# 2 seq# 560 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:01:27.546225+00:00
+Thread 1 advanced to log sequence 561 (LGWR switch)
+  Current log# 3 seq# 561 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:01:29.219133+00:00
+Thread 1 cannot allocate new log, sequence 562
+Checkpoint not complete
+  Current log# 3 seq# 561 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:01:30.625345+00:00
+Thread 1 advanced to log sequence 562 (LGWR switch)
+  Current log# 1 seq# 562 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 563
+Checkpoint not complete
+  Current log# 1 seq# 562 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:01:33.706233+00:00
+Thread 1 advanced to log sequence 563 (LGWR switch)
+  Current log# 2 seq# 563 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 564
+Checkpoint not complete
+  Current log# 2 seq# 563 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:01:36.760279+00:00
+Thread 1 advanced to log sequence 564 (LGWR switch)
+  Current log# 3 seq# 564 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:01:38.226134+00:00
+Thread 1 cannot allocate new log, sequence 565
+Checkpoint not complete
+  Current log# 3 seq# 564 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:01:39.839748+00:00
+Thread 1 advanced to log sequence 565 (LGWR switch)
+  Current log# 1 seq# 565 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 566
+Checkpoint not complete
+  Current log# 1 seq# 565 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:01:42.901815+00:00
+Thread 1 advanced to log sequence 566 (LGWR switch)
+  Current log# 2 seq# 566 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:01:44.016688+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_4979.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_196"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T15:01:44.022787+00:00
+Thread 1 cannot allocate new log, sequence 567
+Checkpoint not complete
+  Current log# 2 seq# 566 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:01:45.948921+00:00
+Thread 1 advanced to log sequence 567 (LGWR switch)
+  Current log# 3 seq# 567 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:11:21.384814+00:00
+Thread 1 advanced to log sequence 568 (LGWR switch)
+  Current log# 1 seq# 568 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:11:21.958174+00:00
+Thread 1 advanced to log sequence 569 (LGWR switch)
+  Current log# 2 seq# 569 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:11:22.469910+00:00
+Thread 1 cannot allocate new log, sequence 570
+Checkpoint not complete
+  Current log# 2 seq# 569 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:11:23.451926+00:00
+Thread 1 advanced to log sequence 570 (LGWR switch)
+  Current log# 3 seq# 570 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:11:24.449792+00:00
+Thread 1 cannot allocate new log, sequence 571
+Checkpoint not complete
+  Current log# 3 seq# 570 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:11:26.580966+00:00
+Thread 1 advanced to log sequence 571 (LGWR switch)
+  Current log# 1 seq# 571 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 572
+Checkpoint not complete
+  Current log# 1 seq# 571 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:11:29.661029+00:00
+Thread 1 advanced to log sequence 572 (LGWR switch)
+  Current log# 2 seq# 572 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:11:30.541908+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_5254.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_198"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T15:21:20.760304+00:00
+Thread 1 advanced to log sequence 573 (LGWR switch)
+  Current log# 3 seq# 573 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:21:22.320719+00:00
+Thread 1 advanced to log sequence 574 (LGWR switch)
+  Current log# 1 seq# 574 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 575
+Checkpoint not complete
+  Current log# 1 seq# 574 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:21:25.620608+00:00
+Thread 1 advanced to log sequence 575 (LGWR switch)
+  Current log# 2 seq# 575 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:21:25.682683+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_5519.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_200"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T15:21:27.223173+00:00
+Thread 1 cannot allocate new log, sequence 576
+Checkpoint not complete
+  Current log# 2 seq# 575 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:21:28.664026+00:00
+Thread 1 advanced to log sequence 576 (LGWR switch)
+  Current log# 3 seq# 576 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:31:23.713452+00:00
+Thread 1 advanced to log sequence 577 (LGWR switch)
+  Current log# 1 seq# 577 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:31:24.234874+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_5785.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_202"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T15:31:27.377393+00:00
+Thread 1 advanced to log sequence 578 (LGWR switch)
+  Current log# 2 seq# 578 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:41:26.327764+00:00
+Thread 1 advanced to log sequence 579 (LGWR switch)
+  Current log# 3 seq# 579 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T15:41:27.046389+00:00
+Thread 1 advanced to log sequence 580 (LGWR switch)
+  Current log# 1 seq# 580 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:41:27.251891+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_6034.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_204"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T15:41:30.055574+00:00
+Thread 1 cannot allocate new log, sequence 581
+Checkpoint not complete
+  Current log# 1 seq# 580 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T15:41:32.921595+00:00
+Thread 1 advanced to log sequence 581 (LGWR switch)
+  Current log# 2 seq# 581 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 582
+Checkpoint not complete
+  Current log# 2 seq# 581 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T15:41:35.989340+00:00
+Thread 1 advanced to log sequence 582 (LGWR switch)
+  Current log# 3 seq# 582 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:25:22.898090+00:00
+Warning: VKTM detected a forward time drift. 
+Please see the VKTM trace file for more details:
+/u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_vktm_35.trc
+2021-05-08T19:25:23.198875+00:00
+Warning: VKTM detected a forward time drift. 
+Time drifts can result in unexpected behavior such as time-outs. 
+Please see the VKTM trace file for more details:
+/u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_vktm_35.trc
+2021-05-08T19:25:41.599526+00:00
+Thread 1 advanced to log sequence 583 (LGWR switch)
+  Current log# 1 seq# 583 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:25:42.387666+00:00
+Thread 1 advanced to log sequence 584 (LGWR switch)
+  Current log# 2 seq# 584 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:26:22.890126+00:00
+Thread 1 cannot allocate new log, sequence 585
+Checkpoint not complete
+  Current log# 2 seq# 584 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:26:24.417385+00:00
+Thread 1 advanced to log sequence 585 (LGWR switch)
+  Current log# 3 seq# 585 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:26:26.104978+00:00
+Thread 1 cannot allocate new log, sequence 586
+Checkpoint not complete
+  Current log# 3 seq# 585 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:26:27.487032+00:00
+Thread 1 advanced to log sequence 586 (LGWR switch)
+  Current log# 1 seq# 586 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 587
+Checkpoint not complete
+  Current log# 1 seq# 586 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:26:30.571901+00:00
+Thread 1 advanced to log sequence 587 (LGWR switch)
+  Current log# 2 seq# 587 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 588
+Checkpoint not complete
+  Current log# 2 seq# 587 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:26:33.642168+00:00
+Thread 1 advanced to log sequence 588 (LGWR switch)
+  Current log# 3 seq# 588 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 589
+Checkpoint not complete
+  Current log# 3 seq# 588 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:26:36.714402+00:00
+Thread 1 advanced to log sequence 589 (LGWR switch)
+  Current log# 1 seq# 589 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 590
+Checkpoint not complete
+  Current log# 1 seq# 589 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:26:39.791677+00:00
+Thread 1 advanced to log sequence 590 (LGWR switch)
+  Current log# 2 seq# 590 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:26:40.985689+00:00
+Thread 1 cannot allocate new log, sequence 591
+Checkpoint not complete
+  Current log# 2 seq# 590 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:26:42.851222+00:00
+Thread 1 advanced to log sequence 591 (LGWR switch)
+  Current log# 3 seq# 591 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:26:44.124815+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_6345.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_206"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T19:26:44.146466+00:00
+Thread 1 cannot allocate new log, sequence 592
+Checkpoint not complete
+  Current log# 3 seq# 591 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:26:45.884772+00:00
+Thread 1 advanced to log sequence 592 (LGWR switch)
+  Current log# 1 seq# 592 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:36:22.089388+00:00
+Thread 1 advanced to log sequence 593 (LGWR switch)
+  Current log# 2 seq# 593 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:36:22.882818+00:00
+Thread 1 advanced to log sequence 594 (LGWR switch)
+  Current log# 3 seq# 594 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:36:25.812651+00:00
+Thread 1 cannot allocate new log, sequence 595
+Checkpoint not complete
+  Current log# 3 seq# 594 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:36:26.545297+00:00
+Thread 1 advanced to log sequence 595 (LGWR switch)
+  Current log# 1 seq# 595 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:36:27.154423+00:00
+Thread 1 cannot allocate new log, sequence 596
+Checkpoint not complete
+  Current log# 1 seq# 595 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:36:29.608714+00:00
+Thread 1 advanced to log sequence 596 (LGWR switch)
+  Current log# 2 seq# 596 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 597
+Checkpoint not complete
+  Current log# 2 seq# 596 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:36:32.678836+00:00
+Thread 1 advanced to log sequence 597 (LGWR switch)
+  Current log# 3 seq# 597 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 598
+Checkpoint not complete
+  Current log# 3 seq# 597 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:36:35.750989+00:00
+Thread 1 advanced to log sequence 598 (LGWR switch)
+  Current log# 1 seq# 598 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 599
+Checkpoint not complete
+  Current log# 1 seq# 598 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:36:38.826304+00:00
+Thread 1 advanced to log sequence 599 (LGWR switch)
+  Current log# 2 seq# 599 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:36:40.491613+00:00
+Thread 1 cannot allocate new log, sequence 600
+Checkpoint not complete
+  Current log# 2 seq# 599 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:36:41.887141+00:00
+Thread 1 advanced to log sequence 600 (LGWR switch)
+  Current log# 3 seq# 600 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:36:42.688946+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_6623.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_208"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T19:46:17.586530+00:00
+Thread 1 advanced to log sequence 601 (LGWR switch)
+  Current log# 1 seq# 601 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:46:19.182476+00:00
+Thread 1 advanced to log sequence 602 (LGWR switch)
+  Current log# 2 seq# 602 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 603
+Checkpoint not complete
+  Current log# 2 seq# 602 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:46:22.502594+00:00
+Thread 1 advanced to log sequence 603 (LGWR switch)
+  Current log# 3 seq# 603 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 604
+Checkpoint not complete
+  Current log# 3 seq# 603 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:46:25.569906+00:00
+Thread 1 advanced to log sequence 604 (LGWR switch)
+  Current log# 1 seq# 604 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:46:25.968908+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_6879.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_210"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T19:46:26.875274+00:00
+Thread 1 cannot allocate new log, sequence 605
+Checkpoint not complete
+  Current log# 1 seq# 604 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:46:28.643566+00:00
+Thread 1 advanced to log sequence 605 (LGWR switch)
+  Current log# 2 seq# 605 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 606
+Checkpoint not complete
+  Current log# 2 seq# 605 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:46:31.715663+00:00
+Thread 1 advanced to log sequence 606 (LGWR switch)
+  Current log# 3 seq# 606 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:56:19.607243+00:00
+Thread 1 advanced to log sequence 607 (LGWR switch)
+  Current log# 1 seq# 607 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T19:56:20.651380+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_7136.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_212"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T19:56:21.868565+00:00
+Thread 1 advanced to log sequence 608 (LGWR switch)
+  Current log# 2 seq# 608 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:56:23.081297+00:00
+Thread 1 cannot allocate new log, sequence 609
+Checkpoint not complete
+  Current log# 2 seq# 608 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T19:56:24.489885+00:00
+Thread 1 advanced to log sequence 609 (LGWR switch)
+  Current log# 3 seq# 609 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 610
+Checkpoint not complete
+  Current log# 3 seq# 609 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T19:56:27.700687+00:00
+Thread 1 advanced to log sequence 610 (LGWR switch)
+  Current log# 1 seq# 610 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:00:37.150503+00:00
+Thread 1 cannot allocate new log, sequence 611
+Checkpoint not complete
+  Current log# 1 seq# 610 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:00:39.600649+00:00
+Thread 1 advanced to log sequence 611 (LGWR switch)
+  Current log# 2 seq# 611 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:06:13.007343+00:00
+Thread 1 advanced to log sequence 612 (LGWR switch)
+  Current log# 3 seq# 612 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:06:21.080047+00:00
+Thread 1 advanced to log sequence 613 (LGWR switch)
+  Current log# 1 seq# 613 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:06:22.381958+00:00
+Thread 1 cannot allocate new log, sequence 614
+Checkpoint not complete
+  Current log# 1 seq# 613 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:06:23.655344+00:00
+Thread 1 advanced to log sequence 614 (LGWR switch)
+  Current log# 2 seq# 614 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 615
+Checkpoint not complete
+  Current log# 2 seq# 614 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:06:26.728673+00:00
+Thread 1 advanced to log sequence 615 (LGWR switch)
+  Current log# 3 seq# 615 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 616
+Checkpoint not complete
+  Current log# 3 seq# 615 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:06:29.790510+00:00
+Thread 1 advanced to log sequence 616 (LGWR switch)
+  Current log# 1 seq# 616 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:06:31.113764+00:00
+Thread 1 cannot allocate new log, sequence 617
+Checkpoint not complete
+  Current log# 1 seq# 616 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:06:32.875086+00:00
+Thread 1 advanced to log sequence 617 (LGWR switch)
+  Current log# 2 seq# 617 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:06:34.098955+00:00
+Thread 1 cannot allocate new log, sequence 618
+Checkpoint not complete
+  Current log# 2 seq# 617 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:06:36.018921+00:00
+Thread 1 advanced to log sequence 618 (LGWR switch)
+  Current log# 3 seq# 618 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:06:36.464090+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_7420.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_214"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T20:16:21.702406+00:00
+Thread 1 advanced to log sequence 619 (LGWR switch)
+  Current log# 1 seq# 619 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:16:22.396719+00:00
+Thread 1 advanced to log sequence 620 (LGWR switch)
+  Current log# 2 seq# 620 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:16:22.938049+00:00
+Thread 1 cannot allocate new log, sequence 621
+Checkpoint not complete
+  Current log# 2 seq# 620 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:16:25.778617+00:00
+Thread 1 advanced to log sequence 621 (LGWR switch)
+  Current log# 3 seq# 621 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:16:26.818295+00:00
+Thread 1 cannot allocate new log, sequence 622
+Checkpoint not complete
+  Current log# 3 seq# 621 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:16:28.847119+00:00
+Thread 1 advanced to log sequence 622 (LGWR switch)
+  Current log# 1 seq# 622 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 623
+Checkpoint not complete
+  Current log# 1 seq# 622 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:16:31.907750+00:00
+Thread 1 advanced to log sequence 623 (LGWR switch)
+  Current log# 2 seq# 623 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 624
+Checkpoint not complete
+  Current log# 2 seq# 623 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:16:34.980749+00:00
+Thread 1 advanced to log sequence 624 (LGWR switch)
+  Current log# 3 seq# 624 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:16:35.706009+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_7671.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_216"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T20:26:22.100859+00:00
+Thread 1 advanced to log sequence 625 (LGWR switch)
+  Current log# 1 seq# 625 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:26:22.783090+00:00
+Thread 1 advanced to log sequence 626 (LGWR switch)
+  Current log# 2 seq# 626 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:26:23.456883+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_7929.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_218"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T20:26:25.557788+00:00
+Thread 1 cannot allocate new log, sequence 627
+Checkpoint not complete
+  Current log# 2 seq# 626 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:26:27.877183+00:00
+Thread 1 advanced to log sequence 627 (LGWR switch)
+  Current log# 3 seq# 627 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 628
+Checkpoint not complete
+  Current log# 3 seq# 627 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:26:31.025702+00:00
+Thread 1 advanced to log sequence 628 (LGWR switch)
+  Current log# 1 seq# 628 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:36:22.471553+00:00
+Thread 1 advanced to log sequence 629 (LGWR switch)
+  Current log# 2 seq# 629 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:36:23.180907+00:00
+Thread 1 advanced to log sequence 630 (LGWR switch)
+  Current log# 3 seq# 630 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:36:23.533734+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_8191.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_220"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T20:36:26.013145+00:00
+Thread 1 cannot allocate new log, sequence 631
+Checkpoint not complete
+  Current log# 3 seq# 630 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:36:26.830174+00:00
+Thread 1 advanced to log sequence 631 (LGWR switch)
+  Current log# 1 seq# 631 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:36:27.383985+00:00
+Thread 1 cannot allocate new log, sequence 632
+Checkpoint not complete
+  Current log# 1 seq# 631 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:36:29.984044+00:00
+Thread 1 advanced to log sequence 632 (LGWR switch)
+  Current log# 2 seq# 632 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:46:23.379345+00:00
+Thread 1 advanced to log sequence 633 (LGWR switch)
+  Current log# 3 seq# 633 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:46:23.927346+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_8443.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_222"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T20:46:26.879162+00:00
+Thread 1 advanced to log sequence 634 (LGWR switch)
+  Current log# 1 seq# 634 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 635
+Checkpoint not complete
+  Current log# 1 seq# 634 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T20:46:28.905897+00:00
+Thread 1 advanced to log sequence 635 (LGWR switch)
+  Current log# 2 seq# 635 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T20:56:24.422470+00:00
+Thread 1 advanced to log sequence 636 (LGWR switch)
+  Current log# 3 seq# 636 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T20:56:25.147062+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_8704.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_224"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T20:56:27.786694+00:00
+Thread 1 advanced to log sequence 637 (LGWR switch)
+  Current log# 1 seq# 637 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:00:00.784295+00:00
+Thread 1 cannot allocate new log, sequence 638
+Checkpoint not complete
+  Current log# 1 seq# 637 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:00:03.114991+00:00
+Thread 1 advanced to log sequence 638 (LGWR switch)
+  Current log# 2 seq# 638 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:00:11.586328+00:00
+Thread 1 cannot allocate new log, sequence 639
+Checkpoint not complete
+  Current log# 2 seq# 638 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:00:12.349173+00:00
+Thread 1 advanced to log sequence 639 (LGWR switch)
+  Current log# 3 seq# 639 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:06:18.611121+00:00
+Thread 1 advanced to log sequence 640 (LGWR switch)
+  Current log# 1 seq# 640 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:06:26.021409+00:00
+Thread 1 advanced to log sequence 641 (LGWR switch)
+  Current log# 2 seq# 641 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:06:27.227624+00:00
+Thread 1 cannot allocate new log, sequence 642
+Checkpoint not complete
+  Current log# 2 seq# 641 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:06:30.183697+00:00
+Thread 1 advanced to log sequence 642 (LGWR switch)
+  Current log# 3 seq# 642 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 643
+Checkpoint not complete
+  Current log# 3 seq# 642 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:06:33.246486+00:00
+Thread 1 advanced to log sequence 643 (LGWR switch)
+  Current log# 1 seq# 643 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:06:34.555952+00:00
+Thread 1 cannot allocate new log, sequence 644
+Checkpoint not complete
+  Current log# 1 seq# 643 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:06:36.319916+00:00
+Thread 1 advanced to log sequence 644 (LGWR switch)
+  Current log# 2 seq# 644 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 645
+Checkpoint not complete
+  Current log# 2 seq# 644 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:06:39.392996+00:00
+Thread 1 advanced to log sequence 645 (LGWR switch)
+  Current log# 3 seq# 645 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 646
+Checkpoint not complete
+  Current log# 3 seq# 645 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:06:42.470938+00:00
+Thread 1 advanced to log sequence 646 (LGWR switch)
+  Current log# 1 seq# 646 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 647
+Checkpoint not complete
+  Current log# 1 seq# 646 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:06:45.538122+00:00
+Thread 1 advanced to log sequence 647 (LGWR switch)
+  Current log# 2 seq# 647 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:06:46.305712+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_8988.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_226"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T21:16:25.872211+00:00
+Thread 1 advanced to log sequence 648 (LGWR switch)
+  Current log# 3 seq# 648 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:16:26.606762+00:00
+Thread 1 advanced to log sequence 649 (LGWR switch)
+  Current log# 1 seq# 649 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:16:27.200351+00:00
+Thread 1 cannot allocate new log, sequence 650
+Checkpoint not complete
+  Current log# 1 seq# 649 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:16:29.223680+00:00
+Thread 1 advanced to log sequence 650 (LGWR switch)
+  Current log# 2 seq# 650 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:16:30.240369+00:00
+Thread 1 cannot allocate new log, sequence 651
+Checkpoint not complete
+  Current log# 2 seq# 650 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:16:30.620664+00:00
+Thread 1 advanced to log sequence 651 (LGWR switch)
+  Current log# 3 seq# 651 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:16:31.237826+00:00
+Thread 1 cannot allocate new log, sequence 652
+Checkpoint not complete
+  Current log# 3 seq# 651 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:16:32.247557+00:00
+Thread 1 advanced to log sequence 652 (LGWR switch)
+  Current log# 1 seq# 652 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 653
+Checkpoint not complete
+  Current log# 1 seq# 652 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:16:35.364034+00:00
+Thread 1 advanced to log sequence 653 (LGWR switch)
+  Current log# 2 seq# 653 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:16:35.829211+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_9242.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_228"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T21:16:36.630482+00:00
+Thread 1 cannot allocate new log, sequence 654
+Checkpoint not complete
+  Current log# 2 seq# 653 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:16:38.440701+00:00
+Thread 1 advanced to log sequence 654 (LGWR switch)
+  Current log# 3 seq# 654 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 655
+Checkpoint not complete
+  Current log# 3 seq# 654 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:16:41.575108+00:00
+Thread 1 advanced to log sequence 655 (LGWR switch)
+  Current log# 1 seq# 655 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:26:27.643015+00:00
+Thread 1 advanced to log sequence 656 (LGWR switch)
+  Current log# 2 seq# 656 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:26:28.378832+00:00
+Thread 1 advanced to log sequence 657 (LGWR switch)
+  Current log# 3 seq# 657 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:26:28.708352+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_9504.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_230"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T21:26:31.300421+00:00
+Thread 1 cannot allocate new log, sequence 658
+Checkpoint not complete
+  Current log# 3 seq# 657 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:26:34.417028+00:00
+Thread 1 advanced to log sequence 658 (LGWR switch)
+  Current log# 1 seq# 658 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:26:51.479099+00:00
+Thread 1 cannot allocate new log, sequence 659
+Checkpoint not complete
+  Current log# 1 seq# 658 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:26:52.918453+00:00
+Thread 1 advanced to log sequence 659 (LGWR switch)
+  Current log# 2 seq# 659 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:36:28.637645+00:00
+Thread 1 advanced to log sequence 660 (LGWR switch)
+  Current log# 3 seq# 660 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:36:28.908977+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_9777.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_232"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T21:46:28.631958+00:00
+Thread 1 advanced to log sequence 661 (LGWR switch)
+  Current log# 1 seq# 661 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:46:29.547836+00:00
+Thread 1 advanced to log sequence 662 (LGWR switch)
+  Current log# 2 seq# 662 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:46:29.678523+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_10028.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_234"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T21:46:32.584934+00:00
+Thread 1 cannot allocate new log, sequence 663
+Checkpoint not complete
+  Current log# 2 seq# 662 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:46:35.557020+00:00
+Thread 1 advanced to log sequence 663 (LGWR switch)
+  Current log# 3 seq# 663 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T21:56:29.873007+00:00
+Thread 1 advanced to log sequence 664 (LGWR switch)
+  Current log# 1 seq# 664 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T21:56:30.611797+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_10273.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_236"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T21:56:38.719180+00:00
+Thread 1 advanced to log sequence 665 (LGWR switch)
+  Current log# 2 seq# 665 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 666
+Checkpoint not complete
+  Current log# 2 seq# 665 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T21:56:40.715107+00:00
+Thread 1 advanced to log sequence 666 (LGWR switch)
+  Current log# 3 seq# 666 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:00:45.200742+00:00
+Thread 1 cannot allocate new log, sequence 667
+Checkpoint not complete
+  Current log# 3 seq# 666 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:00:46.517331+00:00
+Thread 1 advanced to log sequence 667 (LGWR switch)
+  Current log# 1 seq# 667 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 668
+Checkpoint not complete
+  Current log# 1 seq# 667 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:00:49.575935+00:00
+Thread 1 advanced to log sequence 668 (LGWR switch)
+  Current log# 2 seq# 668 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 669
+Checkpoint not complete
+  Current log# 2 seq# 668 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:00:52.735095+00:00
+Thread 1 advanced to log sequence 669 (LGWR switch)
+  Current log# 3 seq# 669 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:06:30.344667+00:00
+Resize operation completed for file# 3, old size 829440K, new size 839680K
+2021-05-08T22:06:31.966041+00:00
+Thread 1 advanced to log sequence 670 (LGWR switch)
+  Current log# 1 seq# 670 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:06:32.680482+00:00
+Thread 1 advanced to log sequence 671 (LGWR switch)
+  Current log# 2 seq# 671 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:06:33.636679+00:00
+Thread 1 cannot allocate new log, sequence 672
+Checkpoint not complete
+  Current log# 2 seq# 671 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:06:36.727005+00:00
+Thread 1 advanced to log sequence 672 (LGWR switch)
+  Current log# 3 seq# 672 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 673
+Checkpoint not complete
+  Current log# 3 seq# 672 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:06:39.787675+00:00
+Thread 1 advanced to log sequence 673 (LGWR switch)
+  Current log# 1 seq# 673 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 674
+Checkpoint not complete
+  Current log# 1 seq# 673 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:06:42.855071+00:00
+Thread 1 advanced to log sequence 674 (LGWR switch)
+  Current log# 2 seq# 674 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 675
+Checkpoint not complete
+  Current log# 2 seq# 674 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:06:45.926920+00:00
+Thread 1 advanced to log sequence 675 (LGWR switch)
+  Current log# 3 seq# 675 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:06:47.094905+00:00
+Thread 1 cannot allocate new log, sequence 676
+Checkpoint not complete
+  Current log# 3 seq# 675 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:06:49.006560+00:00
+Thread 1 advanced to log sequence 676 (LGWR switch)
+  Current log# 1 seq# 676 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:06:49.791594+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_10579.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_238"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T22:16:32.997296+00:00
+Thread 1 advanced to log sequence 677 (LGWR switch)
+  Current log# 2 seq# 677 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:16:33.682046+00:00
+Thread 1 advanced to log sequence 678 (LGWR switch)
+  Current log# 3 seq# 678 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:16:34.451528+00:00
+Thread 1 cannot allocate new log, sequence 679
+Checkpoint not complete
+  Current log# 3 seq# 678 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:16:35.692230+00:00
+Thread 1 advanced to log sequence 679 (LGWR switch)
+  Current log# 1 seq# 679 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 680
+Checkpoint not complete
+  Current log# 1 seq# 679 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:16:38.820884+00:00
+Thread 1 advanced to log sequence 680 (LGWR switch)
+  Current log# 2 seq# 680 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 681
+Checkpoint not complete
+  Current log# 2 seq# 680 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:16:41.901564+00:00
+Thread 1 advanced to log sequence 681 (LGWR switch)
+  Current log# 3 seq# 681 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 682
+Checkpoint not complete
+  Current log# 3 seq# 681 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:16:44.967262+00:00
+Thread 1 advanced to log sequence 682 (LGWR switch)
+  Current log# 1 seq# 682 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 683
+Checkpoint not complete
+  Current log# 1 seq# 682 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:16:48.054557+00:00
+Thread 1 advanced to log sequence 683 (LGWR switch)
+  Current log# 2 seq# 683 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:16:48.339509+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_10830.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_240"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T22:26:35.016834+00:00
+Thread 1 advanced to log sequence 684 (LGWR switch)
+  Current log# 3 seq# 684 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:26:35.838906+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_11088.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_242"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T22:26:38.073196+00:00
+Thread 1 advanced to log sequence 685 (LGWR switch)
+  Current log# 1 seq# 685 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:36:35.389085+00:00
+Thread 1 advanced to log sequence 686 (LGWR switch)
+  Current log# 2 seq# 686 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:36:36.450188+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_11354.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_244"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T22:36:39.334594+00:00
+Thread 1 advanced to log sequence 687 (LGWR switch)
+  Current log# 3 seq# 687 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 688
+Checkpoint not complete
+  Current log# 3 seq# 687 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:36:43.044982+00:00
+Thread 1 advanced to log sequence 688 (LGWR switch)
+  Current log# 1 seq# 688 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:46:36.933703+00:00
+Thread 1 advanced to log sequence 689 (LGWR switch)
+  Current log# 2 seq# 689 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T22:46:37.210507+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_11601.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_246"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T22:46:40.357222+00:00
+Thread 1 advanced to log sequence 690 (LGWR switch)
+  Current log# 3 seq# 690 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T22:56:38.113232+00:00
+Thread 1 advanced to log sequence 691 (LGWR switch)
+  Current log# 1 seq# 691 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T22:56:38.656039+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_11853.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_248"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T22:56:41.674154+00:00
+Thread 1 advanced to log sequence 692 (LGWR switch)
+  Current log# 2 seq# 692 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:00:22.205210+00:00
+Thread 1 cannot allocate new log, sequence 693
+Checkpoint not complete
+  Current log# 2 seq# 692 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:00:22.312758+00:00
+Thread 1 advanced to log sequence 693 (LGWR switch)
+  Current log# 3 seq# 693 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:06:39.397763+00:00
+Thread 1 advanced to log sequence 694 (LGWR switch)
+  Current log# 1 seq# 694 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:06:40.224640+00:00
+Thread 1 advanced to log sequence 695 (LGWR switch)
+  Current log# 2 seq# 695 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:06:41.473372+00:00
+Thread 1 cannot allocate new log, sequence 696
+Checkpoint not complete
+  Current log# 2 seq# 695 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:06:43.250344+00:00
+Thread 1 advanced to log sequence 696 (LGWR switch)
+  Current log# 3 seq# 696 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 697
+Checkpoint not complete
+  Current log# 3 seq# 696 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:06:46.316488+00:00
+Thread 1 advanced to log sequence 697 (LGWR switch)
+  Current log# 1 seq# 697 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 698
+Checkpoint not complete
+  Current log# 1 seq# 697 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:06:49.381174+00:00
+Thread 1 advanced to log sequence 698 (LGWR switch)
+  Current log# 2 seq# 698 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:06:49.867222+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_12136.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_250"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T23:16:43.619208+00:00
+Thread 1 advanced to log sequence 699 (LGWR switch)
+  Current log# 3 seq# 699 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:16:45.459900+00:00
+Thread 1 advanced to log sequence 700 (LGWR switch)
+  Current log# 1 seq# 700 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 701
+Checkpoint not complete
+  Current log# 1 seq# 700 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:16:48.442930+00:00
+Thread 1 advanced to log sequence 701 (LGWR switch)
+  Current log# 2 seq# 701 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:16:49.017912+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_12382.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_252"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T23:26:41.404387+00:00
+Thread 1 advanced to log sequence 702 (LGWR switch)
+  Current log# 3 seq# 702 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:26:42.229007+00:00
+Thread 1 advanced to log sequence 703 (LGWR switch)
+  Current log# 1 seq# 703 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:26:42.706202+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_12655.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_254"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T23:26:50.510928+00:00
+Thread 1 cannot allocate new log, sequence 704
+Checkpoint not complete
+  Current log# 1 seq# 703 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:26:53.608221+00:00
+Thread 1 advanced to log sequence 704 (LGWR switch)
+  Current log# 2 seq# 704 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 705
+Checkpoint not complete
+  Current log# 2 seq# 704 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:26:56.679912+00:00
+Thread 1 advanced to log sequence 705 (LGWR switch)
+  Current log# 3 seq# 705 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 706
+Checkpoint not complete
+  Current log# 3 seq# 705 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:26:59.764713+00:00
+Thread 1 advanced to log sequence 706 (LGWR switch)
+  Current log# 1 seq# 706 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:36:42.775402+00:00
+Thread 1 advanced to log sequence 707 (LGWR switch)
+  Current log# 2 seq# 707 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:36:43.444779+00:00
+Thread 1 advanced to log sequence 708 (LGWR switch)
+  Current log# 3 seq# 708 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:36:44.348848+00:00
+Thread 1 cannot allocate new log, sequence 709
+Checkpoint not complete
+  Current log# 3 seq# 708 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:36:46.506448+00:00
+Thread 1 advanced to log sequence 709 (LGWR switch)
+  Current log# 1 seq# 709 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 710
+Checkpoint not complete
+  Current log# 1 seq# 709 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:36:49.568325+00:00
+Thread 1 advanced to log sequence 710 (LGWR switch)
+  Current log# 2 seq# 710 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:36:49.802487+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_12922.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_256"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T23:36:50.659601+00:00
+Thread 1 cannot allocate new log, sequence 711
+Checkpoint not complete
+  Current log# 2 seq# 710 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:36:52.648162+00:00
+Thread 1 advanced to log sequence 711 (LGWR switch)
+  Current log# 3 seq# 711 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:46:42.690773+00:00
+Thread 1 advanced to log sequence 712 (LGWR switch)
+  Current log# 1 seq# 712 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:46:43.718570+00:00
+Thread 1 advanced to log sequence 713 (LGWR switch)
+  Current log# 2 seq# 713 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:46:44.394727+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_13174.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_258"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-08T23:46:46.287806+00:00
+Thread 1 cannot allocate new log, sequence 714
+Checkpoint not complete
+  Current log# 2 seq# 713 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-08T23:46:48.614739+00:00
+Thread 1 advanced to log sequence 714 (LGWR switch)
+  Current log# 3 seq# 714 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-08T23:56:44.838538+00:00
+Thread 1 advanced to log sequence 715 (LGWR switch)
+  Current log# 1 seq# 715 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-08T23:56:45.907373+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_13431.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_260"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-09T00:00:01.030436+00:00
+Thread 1 advanced to log sequence 716 (LGWR switch)
+  Current log# 2 seq# 716 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-09T00:00:59.282169+00:00
+Thread 1 cannot allocate new log, sequence 717
+Checkpoint not complete
+  Current log# 2 seq# 716 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-09T00:00:59.554081+00:00
+Thread 1 advanced to log sequence 717 (LGWR switch)
+  Current log# 3 seq# 717 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-09T00:06:43.933675+00:00
+Thread 1 advanced to log sequence 718 (LGWR switch)
+  Current log# 1 seq# 718 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-09T00:06:44.515808+00:00
+TABLE SYS.WRI$_OPTSTAT_HISTHEAD_HISTORY: ADDED INTERVAL PARTITION SYS_P395 (44324) VALUES LESS THAN (TO_DATE(' 2021-05-10 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+TABLE SYS.WRI$_OPTSTAT_HISTGRM_HISTORY: ADDED INTERVAL PARTITION SYS_P398 (44324) VALUES LESS THAN (TO_DATE(' 2021-05-10 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+2021-05-09T00:06:46.292081+00:00
+Thread 1 advanced to log sequence 719 (LGWR switch)
+  Current log# 2 seq# 719 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 720
+Checkpoint not complete
+  Current log# 2 seq# 719 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-09T00:06:49.759572+00:00
+Thread 1 advanced to log sequence 720 (LGWR switch)
+  Current log# 3 seq# 720 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-09T00:06:50.159182+00:00
+ORCLPDB1(3):TABLE SYS.WRI$_OPTSTAT_HISTHEAD_HISTORY: ADDED INTERVAL PARTITION SYS_P288 (44324) VALUES LESS THAN (TO_DATE(' 2021-05-10 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+ORCLPDB1(3):TABLE SYS.WRI$_OPTSTAT_HISTGRM_HISTORY: ADDED INTERVAL PARTITION SYS_P291 (44324) VALUES LESS THAN (TO_DATE(' 2021-05-10 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+Thread 1 cannot allocate new log, sequence 721
+Checkpoint not complete
+  Current log# 3 seq# 720 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-09T00:06:52.851486+00:00
+Thread 1 advanced to log sequence 721 (LGWR switch)
+  Current log# 1 seq# 721 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 722
+Checkpoint not complete
+  Current log# 1 seq# 721 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-09T00:06:55.913754+00:00
+Thread 1 advanced to log sequence 722 (LGWR switch)
+  Current log# 2 seq# 722 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 723
+Checkpoint not complete
+  Current log# 2 seq# 722 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-09T00:06:58.991074+00:00
+Thread 1 advanced to log sequence 723 (LGWR switch)
+  Current log# 3 seq# 723 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-09T00:06:59.324791+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_13724.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_262"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-09T00:07:08.687329+00:00
+TABLE SYS.WRP$_REPORTS_TIME_BANDS: ADDED INTERVAL PARTITION SYS_P399 (4146) VALUES LESS THAN (TO_DATE(' 2021-05-09 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+Sun May 9 00:08:14 UTC 2021
+shutdown database
+Start up Oracle Database
+Thu May 13 21:23:08 UTC 2021
+start database
+start listener
+The database is ready for use .
+ORCLPDB1(3):Undo initialization finished serial:0 start:3426452 end:3426623 diff:171 ms (0.2 seconds)
+ORCLPDB1(3):Database Characterset for ORCLPDB1 is AL32UTF8
+2021-05-13T21:23:19.646845+00:00
+ORCLPDB1(3):Opatch validation is skipped for PDB ORCLPDB1 (con_id=0)
+ORCLPDB1(3):Opening pdb with no Resource Manager plan active
+Pluggable database ORCLPDB1 opened read write
+Starting background process CJQ0
+Completed: ALTER DATABASE OPEN
+2021-05-13T21:23:20.203321+00:00
+CJQ0 started with pid=40, OS id=230 
+2021-05-13T21:23:24.146585+00:00
+Closing scheduler window
+Closing Resource Manager plan via scheduler window
+Clearing Resource Manager CDB plan via parameter
+ORCLPDB1(3):Closing scheduler window
+ORCLPDB1(3):Closing Resource Manager plan via scheduler window
+ORCLPDB1(3):Clearing Resource Manager plan via parameter
+2021-05-13T21:24:18.488698+00:00
+TABLE SYS.WRP$_REPORTS: ADDED INTERVAL PARTITION SYS_P400 (4151) VALUES LESS THAN (TO_DATE(' 2021-05-14 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+TABLE SYS.WRP$_REPORTS_DETAILS: ADDED INTERVAL PARTITION SYS_P401 (4151) VALUES LESS THAN (TO_DATE(' 2021-05-14 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+TABLE SYS.WRP$_REPORTS_TIME_BANDS: ADDED INTERVAL PARTITION SYS_P404 (4150) VALUES LESS THAN (TO_DATE(' 2021-05-13 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+2021-05-13T21:33:31.840392+00:00
+Thread 1 advanced to log sequence 724 (LGWR switch)
+  Current log# 1 seq# 724 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T21:38:17.258587+00:00
+Thread 1 advanced to log sequence 725 (LGWR switch)
+  Current log# 2 seq# 725 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T21:53:17.924314+00:00
+Thread 1 advanced to log sequence 726 (LGWR switch)
+  Current log# 3 seq# 726 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T21:53:18.791651+00:00
+Thread 1 advanced to log sequence 727 (LGWR switch)
+  Current log# 1 seq# 727 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T22:00:00.178273+00:00
+Setting Resource Manager plan SCHEDULER[0x4AC6]:DEFAULT_MAINTENANCE_PLAN via scheduler window
+Setting Resource Manager CDB plan DEFAULT_MAINTENANCE_PLAN via parameter
+ORCLPDB1(3):Setting Resource Manager plan SCHEDULER[0x4AC0]:DEFAULT_MAINTENANCE_PLAN via scheduler window
+ORCLPDB1(3):Setting Resource Manager plan DEFAULT_MAINTENANCE_PLAN via parameter
+2021-05-13T22:00:02.525210+00:00
+Begin automatic SQL Tuning Advisor run for special tuning task  "SYS_AUTO_SQL_TUNING_TASK"
+End automatic SQL Tuning Advisor run for special tuning task  "SYS_AUTO_SQL_TUNING_TASK"
+2021-05-13T22:00:09.129582+00:00
+TABLE SYS.WRI$_OPTSTAT_HISTHEAD_HISTORY: ADDED INTERVAL PARTITION SYS_P405 (44328) VALUES LESS THAN (TO_DATE(' 2021-05-14 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+TABLE SYS.WRI$_OPTSTAT_HISTGRM_HISTORY: ADDED INTERVAL PARTITION SYS_P408 (44328) VALUES LESS THAN (TO_DATE(' 2021-05-14 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+2021-05-13T22:00:09.534529+00:00
+Thread 1 advanced to log sequence 728 (LGWR switch)
+  Current log# 2 seq# 728 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T22:00:11.424888+00:00
+Thread 1 advanced to log sequence 729 (LGWR switch)
+  Current log# 3 seq# 729 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 730
+Checkpoint not complete
+  Current log# 3 seq# 729 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T22:00:14.059071+00:00
+Thread 1 advanced to log sequence 730 (LGWR switch)
+  Current log# 1 seq# 730 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T22:00:14.448511+00:00
+ORCLPDB1(3):TABLE SYS.WRI$_OPTSTAT_HISTHEAD_HISTORY: ADDED INTERVAL PARTITION SYS_P292 (44328) VALUES LESS THAN (TO_DATE(' 2021-05-14 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+ORCLPDB1(3):TABLE SYS.WRI$_OPTSTAT_HISTGRM_HISTORY: ADDED INTERVAL PARTITION SYS_P295 (44328) VALUES LESS THAN (TO_DATE(' 2021-05-14 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+Thread 1 cannot allocate new log, sequence 731
+Checkpoint not complete
+  Current log# 1 seq# 730 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T22:00:17.117317+00:00
+Thread 1 advanced to log sequence 731 (LGWR switch)
+  Current log# 2 seq# 731 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T22:00:18.115143+00:00
+Thread 1 cannot allocate new log, sequence 732
+Checkpoint not complete
+  Current log# 2 seq# 731 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T22:00:20.189694+00:00
+Thread 1 advanced to log sequence 732 (LGWR switch)
+  Current log# 3 seq# 732 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 733
+Checkpoint not complete
+  Current log# 3 seq# 732 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T22:00:23.274307+00:00
+Thread 1 advanced to log sequence 733 (LGWR switch)
+  Current log# 1 seq# 733 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 734
+Checkpoint not complete
+  Current log# 1 seq# 733 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T22:00:26.346862+00:00
+Thread 1 advanced to log sequence 734 (LGWR switch)
+  Current log# 2 seq# 734 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T22:00:27.530339+00:00
+Thread 1 cannot allocate new log, sequence 735
+Checkpoint not complete
+  Current log# 2 seq# 734 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T22:00:29.374845+00:00
+Thread 1 advanced to log sequence 735 (LGWR switch)
+  Current log# 3 seq# 735 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 736
+Checkpoint not complete
+  Current log# 3 seq# 735 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T22:00:32.483308+00:00
+Thread 1 advanced to log sequence 736 (LGWR switch)
+  Current log# 1 seq# 736 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 737
+Checkpoint not complete
+  Current log# 1 seq# 736 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T22:00:35.549957+00:00
+Thread 1 advanced to log sequence 737 (LGWR switch)
+  Current log# 2 seq# 737 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T22:00:36.683875+00:00
+Thread 1 cannot allocate new log, sequence 738
+Checkpoint not complete
+  Current log# 2 seq# 737 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T22:00:38.614586+00:00
+Thread 1 advanced to log sequence 738 (LGWR switch)
+  Current log# 3 seq# 738 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T22:00:40.130300+00:00
+Thread 1 cannot allocate new log, sequence 739
+Checkpoint not complete
+  Current log# 3 seq# 738 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T22:00:41.702594+00:00
+Thread 1 advanced to log sequence 739 (LGWR switch)
+  Current log# 1 seq# 739 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T22:00:42.916568+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j005_1235.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_264"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-13T22:00:44.576690+00:00
+Thread 1 cannot allocate new log, sequence 740
+Checkpoint not complete
+  Current log# 1 seq# 739 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T22:00:44.723747+00:00
+Thread 1 advanced to log sequence 740 (LGWR switch)
+  Current log# 2 seq# 740 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T22:03:25.304658+00:00
+ORCLPDB1(3):Resize operation completed for file# 18, old size 614400K, new size 624640K
+2021-05-13T22:53:19.979295+00:00
+Thread 1 advanced to log sequence 741 (LGWR switch)
+  Current log# 3 seq# 741 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T23:00:53.737638+00:00
+Thread 1 advanced to log sequence 742 (LGWR switch)
+  Current log# 1 seq# 742 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T23:03:35.826534+00:00
+Thread 1 advanced to log sequence 743 (LGWR switch)
+  Current log# 2 seq# 743 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T23:03:40.995138+00:00
+Thread 1 cannot allocate new log, sequence 744
+Checkpoint not complete
+  Current log# 2 seq# 743 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T23:03:43.333828+00:00
+Thread 1 advanced to log sequence 744 (LGWR switch)
+  Current log# 3 seq# 744 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 745
+Checkpoint not complete
+  Current log# 3 seq# 744 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T23:03:46.391996+00:00
+Thread 1 advanced to log sequence 745 (LGWR switch)
+  Current log# 1 seq# 745 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 746
+Checkpoint not complete
+  Current log# 1 seq# 745 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T23:03:49.478070+00:00
+Thread 1 advanced to log sequence 746 (LGWR switch)
+  Current log# 2 seq# 746 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 747
+Checkpoint not complete
+  Current log# 2 seq# 746 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T23:03:52.558061+00:00
+Thread 1 advanced to log sequence 747 (LGWR switch)
+  Current log# 3 seq# 747 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 748
+Checkpoint not complete
+  Current log# 3 seq# 747 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T23:03:55.610288+00:00
+Thread 1 advanced to log sequence 748 (LGWR switch)
+  Current log# 1 seq# 748 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T23:03:56.618042+00:00
+Thread 1 cannot allocate new log, sequence 749
+Checkpoint not complete
+  Current log# 1 seq# 748 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T23:03:58.680252+00:00
+Thread 1 advanced to log sequence 749 (LGWR switch)
+  Current log# 2 seq# 749 mem# 0: /u04/app/oracle/redo/redo002.log
+Thread 1 cannot allocate new log, sequence 750
+Checkpoint not complete
+  Current log# 2 seq# 749 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T23:04:01.752627+00:00
+Thread 1 advanced to log sequence 750 (LGWR switch)
+  Current log# 3 seq# 750 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 751
+Checkpoint not complete
+  Current log# 3 seq# 750 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T23:04:04.840165+00:00
+Thread 1 advanced to log sequence 751 (LGWR switch)
+  Current log# 1 seq# 751 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T23:04:05.530170+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_2880.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_267"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+2021-05-13T23:13:36.542616+00:00
+Thread 1 advanced to log sequence 752 (LGWR switch)
+  Current log# 2 seq# 752 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T23:13:37.214110+00:00
+Thread 1 advanced to log sequence 753 (LGWR switch)
+  Current log# 3 seq# 753 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T23:13:37.917909+00:00
+Thread 1 cannot allocate new log, sequence 754
+Checkpoint not complete
+  Current log# 3 seq# 753 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T23:13:39.226367+00:00
+Thread 1 advanced to log sequence 754 (LGWR switch)
+  Current log# 1 seq# 754 mem# 0: /u04/app/oracle/redo/redo001.log
+Thread 1 cannot allocate new log, sequence 755
+Checkpoint not complete
+  Current log# 1 seq# 754 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T23:13:42.368241+00:00
+Thread 1 advanced to log sequence 755 (LGWR switch)
+  Current log# 2 seq# 755 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T23:13:42.930867+00:00
+Errors in file /u01/app/oracle/diag/rdbms/orclcdb/ORCLCDB/trace/ORCLCDB_j000_3148.trc:
+ORA-12012: error on auto execute of job "SYS"."ORA$AT_OS_OPT_SY_269"
+ORA-20001: Statistics Advisor: Invalid task name for the current user
+ORA-06512: at "SYS.DBMS_STATS", line 47207
+ORA-06512: at "SYS.DBMS_STATS_ADVISOR", line 882
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 20059
+ORA-06512: at "SYS.DBMS_STATS_INTERNAL", line 22201
+ORA-06512: at "SYS.DBMS_STATS", line 47197
+Thread 1 cannot allocate new log, sequence 756
+Checkpoint not complete
+  Current log# 2 seq# 755 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-13T23:13:45.426856+00:00
+Thread 1 advanced to log sequence 756 (LGWR switch)
+  Current log# 3 seq# 756 mem# 0: /u04/app/oracle/redo/redo003.log
+Thread 1 cannot allocate new log, sequence 757
+Checkpoint not complete
+  Current log# 3 seq# 756 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-13T23:13:48.504414+00:00
+Thread 1 advanced to log sequence 757 (LGWR switch)
+  Current log# 1 seq# 757 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T23:13:49.522550+00:00
+Thread 1 cannot allocate new log, sequence 758
+Checkpoint not complete
+  Current log# 1 seq# 757 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-13T23:13:51.591946+00:00
+Thread 1 advanced to log sequence 758 (LGWR switch)
+  Current log# 2 seq# 758 mem# 0: /u04/app/oracle/redo/redo002.log
+Thu May 13 23:23:06 UTC 2021
+shutdown database
+Start up Oracle Database
+Thu May 13 23:23:40 UTC 2021
+start database
+start listener
+The database is ready for use .
+ORCLPDB1(3):Undo initialization finished serial:0 start:10656975 end:10657109 diff:134 ms (0.1 seconds)
+ORCLPDB1(3):Database Characterset for ORCLPDB1 is AL32UTF8
+2021-05-13T23:23:50.123453+00:00
+ORCLPDB1(3):Opatch validation is skipped for PDB ORCLPDB1 (con_id=0)
+ORCLPDB1(3):Opening pdb with no Resource Manager plan active
+Pluggable database ORCLPDB1 opened read write
+Starting background process CJQ0
+Completed: ALTER DATABASE OPEN
+2021-05-13T23:23:50.687653+00:00
+CJQ0 started with pid=73, OS id=229
+2021-05-13T23:23:54.046075+00:00
+Setting Resource Manager plan SCHEDULER[0x4AC6]:DEFAULT_MAINTENANCE_PLAN via scheduler window
+Setting Resource Manager CDB plan DEFAULT_MAINTENANCE_PLAN via parameter
+ORCLPDB1(3):Setting Resource Manager plan SCHEDULER[0x4AC0]:DEFAULT_MAINTENANCE_PLAN via scheduler window
+ORCLPDB1(3):Setting Resource Manager plan DEFAULT_MAINTENANCE_PLAN via parameter
+2021-05-13T23:57:56.207623+00:00
+ORCLPDB1(3):JIT: pid 673 requesting full stop
+2021-05-13T23:57:56.862382+00:00
+Thread 1 advanced to log sequence 759 (LGWR switch)
+  Current log# 3 seq# 759 mem# 0: /u04/app/oracle/redo/redo003.log
+ORCLPDB1(3):TABLE AUDSYS.AUD$UNIFIED: ADDED INTERVAL PARTITION SYS_P312 (83) VALUES LESS THAN (TIMESTAMP' 2021-06-01 00:00:00')
+2021-05-14T00:00:44.027778+00:00
+Thread 1 advanced to log sequence 760 (LGWR switch)
+  Current log# 1 seq# 760 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-14T00:08:53.084829+00:00
+Thread 1 advanced to log sequence 761 (LGWR switch)
+  Current log# 2 seq# 761 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-14T00:17:32.303573+00:00
+ORCLPDB1(3):TABLE SYS.WRI$_OPTSTAT_HISTHEAD_HISTORY: ADDED INTERVAL PARTITION SYS_P319 (44329) VALUES LESS THAN (TO_DATE(' 2021-05-15 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+2021-05-14T00:23:49.490247+00:00
+Thread 1 advanced to log sequence 762 (LGWR switch)
+  Current log# 3 seq# 762 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-14T00:24:20.600446+00:00
+TABLE SYS.WRP$_REPORTS_TIME_BANDS: ADDED INTERVAL PARTITION SYS_P409 (4151) VALUES LESS THAN (TO_DATE(' 2021-05-14 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+Fri May 14 00:36:04 UTC 2021
+shutdown database
+Start up Oracle Database
+Fri May 14 14:32:16 UTC 2021
+start database
+start listener
+The database is ready for use .
+ORCLPDB1(3):Undo initialization finished serial:0 start:29065586 end:29065724 diff:138 ms (0.1 seconds)
+ORCLPDB1(3):Database Characterset for ORCLPDB1 is AL32UTF8
+2021-05-14T14:32:25.698429+00:00
+ORCLPDB1(3):Opatch validation is skipped for PDB ORCLPDB1 (con_id=0)
+ORCLPDB1(3):Opening pdb with no Resource Manager plan active
+Pluggable database ORCLPDB1 opened read write
+Starting background process CJQ0
+2021-05-14T14:32:26.224521+00:00
+CJQ0 started with pid=73, OS id=230
+Completed: ALTER DATABASE OPEN
+2021-05-14T14:32:29.882223+00:00
+Closing scheduler window
+Closing Resource Manager plan via scheduler window
+Clearing Resource Manager CDB plan via parameter
+ORCLPDB1(3):Closing scheduler window
+ORCLPDB1(3):Closing Resource Manager plan via scheduler window
+ORCLPDB1(3):Clearing Resource Manager plan via parameter
+2021-05-14T14:33:24.634102+00:00
+TABLE SYS.WRP$_REPORTS: ADDED INTERVAL PARTITION SYS_P410 (4152) VALUES LESS THAN (TO_DATE(' 2021-05-15 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+TABLE SYS.WRP$_REPORTS_DETAILS: ADDED INTERVAL PARTITION SYS_P411 (4152) VALUES LESS THAN (TO_DATE(' 2021-05-15 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+2021-05-14T14:42:38.055498+00:00
+Thread 1 advanced to log sequence 763 (LGWR switch)
+  Current log# 1 seq# 763 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-14T15:43:59.785161+00:00
+Thread 1 advanced to log sequence 764 (LGWR switch)
+  Current log# 2 seq# 764 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-14T16:00:38.763191+00:00
+Thread 1 advanced to log sequence 765 (LGWR switch)
+  Current log# 3 seq# 765 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-14T16:41:45.374712+00:00
+Thread 1 advanced to log sequence 766 (LGWR switch)
+  Current log# 1 seq# 766 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-14T17:00:14.585981+00:00
+Thread 1 advanced to log sequence 767 (LGWR switch)
+  Current log# 2 seq# 767 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-14T17:57:43.270481+00:00
+Thread 1 advanced to log sequence 768 (LGWR switch)
+  Current log# 3 seq# 768 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-14T18:00:47.961421+00:00
+Thread 1 advanced to log sequence 769 (LGWR switch)
+  Current log# 1 seq# 769 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-14T18:47:54.587828+00:00
+Thread 1 advanced to log sequence 770 (LGWR switch)
+  Current log# 2 seq# 770 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-14T19:00:19.723692+00:00
+Thread 1 advanced to log sequence 771 (LGWR switch)
+  Current log# 3 seq# 771 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-14T19:32:49.485691+00:00
+ORCLPDB1(3):Resize operation completed for file# 18, old size 624640K, new size 634880K
+2021-05-14T20:00:55.093713+00:00
+Thread 1 advanced to log sequence 772 (LGWR switch)
+  Current log# 1 seq# 772 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-14T20:00:55.258825+00:00
+Thread 1 advanced to log sequence 773 (LGWR switch)
+  Current log# 2 seq# 773 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-14T20:30:00.272347+00:00
+Thread 1 advanced to log sequence 774 (LGWR switch)
+  Current log# 3 seq# 774 mem# 0: /u04/app/oracle/redo/redo003.log
+2021-05-14T20:31:43.430774+00:00
+ORCLPDB1(3):TABLE SYS.WRI$_OPTSTAT_HISTGRM_HISTORY: ADDED INTERVAL PARTITION SYS_P322 (44329) VALUES LESS THAN (TO_DATE(' 2021-05-15 00:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+2021-05-14T21:00:30.391424+00:00
+Thread 1 advanced to log sequence 775 (LGWR switch)
+  Current log# 1 seq# 775 mem# 0: /u04/app/oracle/redo/redo001.log
+2021-05-14T21:00:30.653812+00:00
+Thread 1 advanced to log sequence 776 (LGWR switch)
+  Current log# 2 seq# 776 mem# 0: /u04/app/oracle/redo/redo002.log
+2021-05-14T21:06:15.918249+00:00
+ORCLPDB1(3):JIT: pid 10234 requesting full stop
+2021-05-14T21:06:17.818175+00:00
+Thread 1 advanced to log sequence 777 (LGWR switch)
+  Current log# 3 seq# 777 mem# 0: /u04/app/oracle/redo/redo003.log
+

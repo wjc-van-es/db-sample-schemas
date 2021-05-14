@@ -52,7 +52,7 @@ COLUMN msg_state        FORMAT A15
 COLUMN consumer_name    FORMAT A15
 COLUMN user_data        FORMAT A60
 
-ALTER SESSION SET NLS_LANGUAGE=AMERICAN;
+ALTER SESSION SET NLS_LANGUAGE=American;
 ALTER SESSION SET NLS_TERRITORY=AMERICA;
 
 REM =======================================================
