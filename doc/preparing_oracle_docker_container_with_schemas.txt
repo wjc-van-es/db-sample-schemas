@@ -14,6 +14,8 @@ The principles used in this manual script are the following:
     SQL> !pwd
     /
     https://datacadamia.com/lang/sqlplus/special
+    https://community.oracle.com/tech/developers/discussion/422232/environment-variable-in-sql-plus
+    https://www.oreilly.com/library/view/oracle-sqlplus-the/1565925785/ch04s07.html
 4)  The ability to connect to a running docker container as root to be able to remove files and directories or
     change their permissions with chmod with:
     $ docker exec -u root --workdir / -ti oracle /bin/sh
