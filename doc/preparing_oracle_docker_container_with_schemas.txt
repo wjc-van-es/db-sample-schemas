@@ -10,6 +10,9 @@ The principles used in this manual script are the following:
     -- The question mark "?" is an alias for $ORACLE_HOME
     SQL> @?/human_resources/hr_main.sql
     So for this statement to work the hr_main.sql was copied into $ORACLE_HOME/human_resources/
+    Moreover, a linux bash command can be used inside a sqlplus session by escaping it with !, e.g.:
+    SQL> !pwd
+    /
     https://datacadamia.com/lang/sqlplus/special
 4)  The ability to connect to a running docker container as root to be able to remove files and directories or
     change their permissions with chmod with:
@@ -17,6 +20,15 @@ The principles used in this manual script are the following:
     https://github.com/oracle/docker-images/issues/237
     https://rmoff.net/2021/01/13/running-as-root-on-docker-images-that-dont-use-root/
     https://engineering.bitnami.com/articles/why-non-root-containers-are-important-for-security.html
+5)  By accident I discover only now that the container comes with the hr scripts already available:
+    searching from the root dir
+    sh-4.2# cd /
+    sh-4.2# find . -name 'hr_main.*'
+    ./u01/app/oracle/product/12.2.0/dbhome_1/demo/schema/human_resources/hr_main.sql
+    ./u01/app/oracle/product/12.2.0/dbhome_1/human_resources/hr_main.log
+    ./u01/app/oracle/product/12.2.0/dbhome_1/human_resources/hr_main.sql
+    Looking into the $ORACLE_HOME/demo/schema/human_resources/hr_main.sql with vi reveals it's ready to be executed.
+    However, it's good to know that we could load other files into the container if need be.
 ========================================================================================================================
 Below is the script with manual steps to create the hr schema in the oracle database inside the docker container
 based on the store/oracle/database-enterprise:12.2.0.1-slim image.

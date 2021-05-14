@@ -190,4 +190,70 @@ drwxr-xr-x 31 oracle oinstall  4096 May 14 21:00 ..
 -rwxrwxrwx  1   1000     1000  2445 May 13 20:57 hr_idx.sql
 -rwxrwxrwx  1   1000     1000  4944 May 14 20:48 hr_main.sql
 -rwxrwxrwx  1   1000     1000 45387 May 14 20:48 hr_popul.sql
+
+############ Only now do we discover that hr scripts are already present in the container ##############
+sh-4.2# cd /
+sh-4.2# ls -la
+total 84
+drwxr-xr-x   1 root   root     4096 May 14 21:00 .
+drwxr-xr-x   1 root   root     4096 May 14 21:00 ..
+-rwxr-xr-x   1 root   root        0 May  2 21:18 .dockerenv
+drwxrwxrwx   6   1000     1000 4096 Mar  8 00:10 ORCL
+lrwxrwxrwx   1 root   root        7 Apr 13  2017 bin -> usr/bin
+dr-xr-xr-x   2 root   root     4096 Aug 30  2016 boot
+drwxr-xr-x   5 root   root      360 May 14 14:32 dev
+drwxr-xr-x   1 root   root     4096 May  2 21:18 etc
+drwxr-xr-x   1 root   root     4096 Aug 16  2017 home
+lrwxrwxrwx   1 root   root        7 Apr 13  2017 lib -> usr/lib
+lrwxrwxrwx   1 root   root        9 Apr 13  2017 lib64 -> usr/lib64
+drwxr-xr-x   2 root   root     4096 Aug 30  2016 media
+drwxr-xr-x   2 root   root     4096 Aug 30  2016 mnt
+drwxr-xr-x   2 root   root     4096 Aug 30  2016 opt
+dr-xr-xr-x 444 root   root        0 May 14 14:32 proc
+dr-xr-x---   2 root   root     4096 Apr 13  2017 root
+drwxr-xr-x   1 root   root     4096 Aug 16  2017 run
+lrwxrwxrwx   1 root   root        8 Apr 13  2017 sbin -> usr/sbin
+drwxr-xr-x   2 root   root     4096 Aug 30  2016 srv
+dr-xr-xr-x  13 root   root        0 May 13 21:32 sys
+drwxrwxrwt   1 root   root     4096 May 14 23:11 tmp
+drwxr-xr-x   1 oracle oinstall 4096 Apr 27  2017 u01
+drwxr-xr-x   1 oracle oinstall 4096 May  2 21:19 u02
+drwxr-xr-x   1 oracle oinstall 4096 May  2 21:19 u03
+drwxr-xr-x   1 oracle oinstall 4096 May  2 21:19 u04
+drwxr-xr-x   1 root   root     4096 Apr 13  2017 usr
+drwxr-xr-x   1 root   root     4096 Apr 13  2017 var
+sh-4.2# find . -name 'hr_main.*'
+./u01/app/oracle/product/12.2.0/dbhome_1/demo/schema/human_resources/hr_main.sql
+./u01/app/oracle/product/12.2.0/dbhome_1/human_resources/hr_main.log
+./u01/app/oracle/product/12.2.0/dbhome_1/human_resources/hr_main.sql
+sh-4.2# cd $ORACLE_HOME/demo/schema
+sh-4.2# ls -la
+total 76
+drwxr-xr-x 4 oracle oinstall  4096 Apr 21  2017 .
+drwxr-xr-x 3 oracle oinstall  4096 Apr 21  2017 ..
+-rw-r--r-- 1 oracle oinstall  2322 Apr 21  2017 drop_sch.sql
+drwxr-xr-x 2 oracle oinstall  4096 Apr 21  2017 human_resources
+drwxr-xr-x 2 oracle oinstall  4096 Apr 21  2017 log
+-rw-r--r-- 1 oracle oinstall  1842 Apr 21  2017 mk_dir.sql
+-rw-r--r-- 1 oracle oinstall  1685 Apr 21  2017 mk_dir.sql.sbs
+-rw-r--r-- 1 oracle oinstall 27570 Apr 21  2017 mkplug.sql
+-rw-r--r-- 1 oracle oinstall 16894 Apr 21  2017 sted_mkplug.sql.dbl
+sh-4.2# cd human_resources/
+sh-4.2# ls -la
+total 108
+drwxr-xr-x 2 oracle oinstall  4096 Apr 21  2017 .
+drwxr-xr-x 4 oracle oinstall  4096 Apr 21  2017 ..
+-rw-r--r-- 1 oracle oinstall  1132 Apr 21  2017 hr_analz.sql
+-rw-r--r-- 1 oracle oinstall  2733 Apr 21  2017 hr_code.sql
+-rw-r--r-- 1 oracle oinstall  7186 Apr 21  2017 hr_comnt.sql
+-rw-r--r-- 1 oracle oinstall  9381 Apr 21  2017 hr_cre.sql
+-rw-r--r-- 1 oracle oinstall  2611 Apr 21  2017 hr_drop.sql
+-rw-r--r-- 1 oracle oinstall  2609 Apr 21  2017 hr_drop_new.sql
+-rw-r--r-- 1 oracle oinstall  1345 Apr 21  2017 hr_idx.sql
+-rw-r--r-- 1 oracle oinstall  4755 Apr 21  2017 hr_main.sql
+-rw-r--r-- 1 oracle oinstall  5046 Apr 21  2017 hr_main_new.sql
+-rw-r--r-- 1 oracle oinstall 44288 Apr 21  2017 hr_popul.sql
+######## looking into hr_main with via reveals it is ready to run without modifications ########################
+sh-4.2# vi hr_main.sql
 sh-4.2#
+
