@@ -12,7 +12,7 @@ GROUP BY e.JOB_ID;
 -- candidate view 
 -- embellished version with former query as the subselect in the from
 -- to get extra columns from jobs associated with job_id
--- don't use as keyword in the from / join clause or you get 'SQL command not properly ended' error.
+-- don't use AS keyword in the from / join clause or you get 'SQL command not properly ended' error.
 SELECT 
 j.JOB_TITLE,
 j.MAX_SALARY AS nominal_max_salary,
